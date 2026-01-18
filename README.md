@@ -66,12 +66,10 @@ npm run preview
 └── vite.config.js  # Vite configuration
 ```
 
-## Adding Content
+## Adding Content & Deployment
 
-To add a new post/news item:
-1.  Create a new `.md` file in `content/posts/`.
-2.  Ensure it has the necessary Front Matter (metadata) if the renderer expects it, or just standard Markdown.
-3.  The build process (or dynamic loader) handles the rest.
+For detailed instructions on how to add new blog posts, create projects, and how the automated publishing process works, please refer to the **[HOW-TO.md](HOW-TO.md)** guide.
+
 
 ## License
 
