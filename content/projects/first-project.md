@@ -1,7 +1,6 @@
 ---
 title: "Autonomous Drone Swarm Project"
-date: "2025-05-15"
-author: "DARTS Team"
+logo: "/images/drone-swarm.png"
 excerpt: "A pioneering project focusing on decentralized swarm coordination."
 ---
 

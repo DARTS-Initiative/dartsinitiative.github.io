@@ -573,12 +573,14 @@ body {
 
 /* Post Meta - Styled as a badge */
 /* Post Meta - Styled as a badge */
+/* Post Meta - Styled as a badge */
 .post-meta {
     display: inline-flex;
     align-items: center;
-    background: var(--accent-color);
-    color: white;
-    padding: 6px 16px;
+    /* Default fallback */
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid transparent;
+    padding: 8px 16px;
     border-radius: 50px;
     font-size: 0.85rem;
     font-weight: bold;
@@ -586,20 +588,40 @@ body {
     margin-bottom: 35px;
     text-transform: uppercase;
     letter-spacing: 1px;
-    box-shadow: 0 4px 6px rgba(194, 163, 101, 0.3);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
     width: fit-content;
+    white-space: nowrap;
+    gap: 10px;
+    /* Add space between items */
+}
+
+/* Ensure items inside don't have conflicting margins */
+.post-meta span {
+    display: inline-flex;
+    align-items: center;
+}
+
+.post-meta .separator {
+    opacity: 0.5;
+    font-weight: 300;
+    margin: 0 2px;
+}
+
+.post-meta .category-name {
+    font-weight: 800;
+    /* Make category slightly bolder */
 }
 
 .post-meta .author {
-    margin-left: 12px;
-    padding-left: 12px;
-    border-left: 1px solid rgba(255, 255, 255, 0.3);
-    font-weight: 400;
+    margin-left: 0;
+    padding-left: 0;
+    border-left: none;
 }
 
 .post-card .post-meta .author {
-    border-left: 1px solid var(--text-muted);
-    opacity: 0.8;
+    border-left: none;
+    opacity: 1;
+    /* Inherit opacity from parent color assignment */
 }
 
 
@@ -655,6 +677,16 @@ body {
 
 .back-button:hover::before {
     transform: translateX(-3px);
+}
+
+/* Category Badges */
+.category-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    margin-right: 10px;
 }
 
 /* Footer */
@@ -740,5 +772,78 @@ footer {
         width: 95%;
         top: 10px;
         margin-top: 10px;
+    }
+}
+
+/* Project Logo Styles */
+.project-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.project-info {
+    flex: 1;
+}
+
+.project-info h3 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.project-logo-container {
+    width: 120px;
+    height: 120px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 10px;
+}
+
+.project-logo {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+    transition: transform 0.3s ease;
+}
+
+.post-card:hover .project-logo {
+    transform: scale(1.1);
+}
+
+.project-detail-logo-container {
+    text-align: center;
+    margin: 30px 0;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+}
+
+.project-detail-logo {
+    max-width: 100%;
+    max-height: 300px;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+    .project-card {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+    }
+
+    .project-logo-container {
+        width: 100%;
+        margin-bottom: 20px;
+        align-self: center;
+    }
+
+    .project-info {
+        width: 100%;
     }
 }

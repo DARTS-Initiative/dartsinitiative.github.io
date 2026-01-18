@@ -1,4 +1,5 @@
 import { config } from './config.js';
+import { categories } from './categories.js';
 
 // Load posts metadata at build time
 const posts = import.meta.glob('../content/posts/*.md', { eager: true });
@@ -25,9 +26,11 @@ export function renderHome(container) {
         return `
             <a href="#/post/${slug}" class="post-card" data-slug="${slug}">
                 <h3>${post.attributes.title}</h3>
-                <div class="post-meta">
+                <div class="post-meta" style="${getCategoryStyleString(post.attributes.category)}">
+                    <span class="category-name">${post.attributes.category || 'Others'}</span>
+                    <span class="separator">|</span>
                     <span>${post.attributes.date}</span>
-                    ${post.attributes.author ? `<span class="author">by ${post.attributes.author}</span>` : ''}
+                    ${post.attributes.author ? `<span class="separator">|</span><span class="author">by ${post.attributes.author}</span>` : ''}
                 </div>
                 <p>${post.attributes.excerpt || ''}</p>
             </a>
@@ -77,9 +80,11 @@ export function renderBlog(container) {
         return `
             <a href="#/post/${slug}" class="post-card" data-slug="${slug}">
                 <h3>${post.attributes.title}</h3>
-                <div class="post-meta">
+                <div class="post-meta" style="${getCategoryStyleString(post.attributes.category)}">
+                    <span class="category-name">${post.attributes.category || 'Others'}</span>
+                    <span class="separator">|</span>
                     <span>${post.attributes.date}</span>
-                    ${post.attributes.author ? `<span class="author">by ${post.attributes.author}</span>` : ''}
+                    ${post.attributes.author ? `<span class="separator">|</span><span class="author">by ${post.attributes.author}</span>` : ''}
                 </div>
                 <p>${post.attributes.excerpt || ''}</p>
             </a>
@@ -103,14 +108,15 @@ export function renderProjects(container) {
     const projectsHtml = Object.entries(projects).map(([path, project]) => {
         const slug = path.split('/').pop().replace('.md', '');
         return `
-            <a href="#/project/${slug}" class="post-card" data-slug="${slug}">
+            <a href="#/project/${slug}" class="post-card project-card" data-slug="${slug}">
+            <div class="project-info">
                 <h3>${project.attributes.title}</h3>
-                <div class="post-meta">
-                    <span>${project.attributes.date}</span>
-                    ${project.attributes.author ? `<span class="author">by ${project.attributes.author}</span>` : ''}
-                </div>
                 <p>${project.attributes.excerpt || ''}</p>
-            </a>
+            </div>
+            <div class="project-logo-container">
+                ${project.attributes.logo ? `<img src="${project.attributes.logo}" alt="${project.attributes.title}" class="project-logo">` : ''}
+            </div>
+        </a>
         `;
     }).join('');
 
@@ -123,8 +129,8 @@ export function renderProjects(container) {
             <div style="text-align:center; margin-top:40px;">
                 <a href="#/" class="text-link">← Back to Home</a>
             </div>
-        </div>
-    `;
+        </div >
+        `;
 }
 
 export function renderPost(container, slug) {
@@ -140,9 +146,11 @@ export function renderPost(container, slug) {
         <div class="post-detail">
             <a href="#/blog" class="back-button">Back to Blog</a>
             <h1>${post.attributes.title}</h1>
-            <div class="post-meta">
+            <div class="post-meta" style="${getCategoryStyleString(post.attributes.category)}">
+                <span class="category-name">${post.attributes.category || 'Others'}</span>
+                <span class="separator">|</span>
                 <span>${post.attributes.date}</span>
-                ${post.attributes.author ? `<span class="author">by ${post.attributes.author}</span>` : ''}
+                ${post.attributes.author ? `<span class="separator">|</span><span class="author">by ${post.attributes.author}</span>` : ''}
             </div>
             <div class="post-content">
                 ${processHtml(post.html)}
@@ -164,9 +172,8 @@ export function renderProject(container, slug) {
         <div class="post-detail">
             <a href="#/projects" class="back-button">Back to Projects</a>
             <h1>${project.attributes.title}</h1>
-            <div class="post-meta">
-                <span>${project.attributes.date}</span>
-                ${project.attributes.author ? `<span class="author">by ${project.attributes.author}</span>` : ''}
+            <div class="project-detail-logo-container">
+                 ${project.attributes.logo ? `<img src="${project.attributes.logo}" alt="${project.attributes.title}" class="project-detail-logo">` : ''}
             </div>
             <div class="post-content">
                 ${processHtml(project.html)}
@@ -185,24 +192,24 @@ export function renderPage(container, slug) {
     }
 
     container.innerHTML = `
-        <div class="post-detail">
+        < div class="post-detail" >
             <a href="#/" class="back-button">Back to Home</a>
             <h1>${page.attributes.title}</h1>
             <div class="post-content">
                 ${processHtml(page.html)}
             </div>
-        </div>
+        </div >
         `;
 }
 
 export function render404(container) {
     container.innerHTML = `
-        <div class="post-detail" style="text-align: center;">
+        < div class="post-detail" style = "text-align: center;" >
             <h1>404 - Page Not Found</h1>
             <p>The content you are looking for does not exist.</p>
             <a href="#/" class="back-button">Return to Home</a>
-        </div>
-    `;
+        </div >
+        `;
 }
 
 // Helper to process markdown HTML (e.g., custom image sizes)
@@ -213,7 +220,7 @@ function processHtml(html) {
         const cleanSize = size.trim();
         // Basic validation for CSS size units
         if (/^\d+(px|%|em|rem|vw|vh)$/.test(cleanSize)) {
-            return `<img ${prefix}${alt}" style="width: 100%; max-width: ${cleanSize};" ${suffix}`;
+            return `< img ${prefix}${alt} " style="width: 100 %; max - width: ${cleanSize}; " ${suffix}`;
         }
         return match;
     });
@@ -234,4 +241,13 @@ export function renderFooter() {
             ${linksHtml}
         </div>
         `;
+}
+
+function getCategoryStyleString(categoryName) {
+    const style = categories[categoryName] || categories['default'];
+    return `
+        color: ${style.color};
+        background-color: ${style.backgroundColor};
+        border-color: ${style.borderColor};
+    `;
 }

@@ -1,6 +1,7 @@
 ---
 title: "Toiletazo"
 date: "2025-01-18"
+category: "News"
 author: "DARTS Team"
 excerpt: "Welcome to the official launch of the DARTS Initiative. Our mission is to build the future of autonomous drone colonies through open-source innovation and collaboration."
 ---
