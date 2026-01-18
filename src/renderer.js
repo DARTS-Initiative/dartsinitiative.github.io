@@ -3,7 +3,12 @@ import { config } from './config.js';
 // Load posts metadata at build time
 const posts = import.meta.glob('../content/posts/*.md', { eager: true });
 const pages = import.meta.glob('../content/pages/*.md', { eager: true });
+const projects = import.meta.glob('../content/projects/*.md', { eager: true });
 const intro = import.meta.glob('../content/intro.md', { eager: true });
+
+const sortedPosts = Object.entries(posts).sort(([, a], [, b]) => {
+    return new Date(b.attributes.date) - new Date(a.attributes.date);
+});
 
 export function renderHome(container) {
     const sectionsHtml = Object.entries(pages).map(([path, page]) => {
@@ -15,7 +20,7 @@ export function renderHome(container) {
     `;
     }).join('');
 
-    const postsHtml = Object.entries(posts).map(([path, post]) => {
+    const postsHtml = sortedPosts.slice(0, 2).map(([path, post]) => {
         const slug = path.split('/').pop().replace('.md', '');
         return `
             <a href="#/post/${slug}" class="post-card" data-slug="${slug}">
@@ -52,6 +57,9 @@ export function renderHome(container) {
             <div class="posts-list">
                 ${postsHtml}
             </div>
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="#/blog" class="text-link">View All Posts →</a>
+            </div>
         </div>
 
         <div class="info-text">
@@ -61,6 +69,62 @@ export function renderHome(container) {
             </p>
         </div>
         `;
+}
+
+export function renderBlog(container) {
+    const postsHtml = sortedPosts.map(([path, post]) => {
+        const slug = path.split('/').pop().replace('.md', '');
+        return `
+            <a href="#/post/${slug}" class="post-card" data-slug="${slug}">
+                <h3>${post.attributes.title}</h3>
+                <div class="post-meta">
+                    <span>${post.attributes.date}</span>
+                    ${post.attributes.author ? `<span class="author">by ${post.attributes.author}</span>` : ''}
+                </div>
+                <p>${post.attributes.excerpt || ''}</p>
+            </a>
+        `;
+    }).join('');
+
+    container.innerHTML = `
+        <div class="blog-section" style="margin-top: 40px;">
+            <h2>All Blog Posts</h2>
+            <div class="posts-list">
+                ${postsHtml}
+            </div>
+             <div style="text-align:center; margin-top:40px;">
+                <a href="#/" class="text-link">← Back to Home</a>
+            </div>
+        </div>
+    `;
+}
+
+export function renderProjects(container) {
+    const projectsHtml = Object.entries(projects).map(([path, project]) => {
+        const slug = path.split('/').pop().replace('.md', '');
+        return `
+            <a href="#/project/${slug}" class="post-card" data-slug="${slug}">
+                <h3>${project.attributes.title}</h3>
+                <div class="post-meta">
+                    <span>${project.attributes.date}</span>
+                    ${project.attributes.author ? `<span class="author">by ${project.attributes.author}</span>` : ''}
+                </div>
+                <p>${project.attributes.excerpt || ''}</p>
+            </a>
+        `;
+    }).join('');
+
+    container.innerHTML = `
+        <div class="blog-section" style="margin-top: 40px;">
+            <h2>Our Projects</h2>
+            <div class="posts-list">
+                ${projectsHtml || '<p>No projects found yet.</p>'}
+            </div>
+            <div style="text-align:center; margin-top:40px;">
+                <a href="#/" class="text-link">← Back to Home</a>
+            </div>
+        </div>
+    `;
 }
 
 export function renderPost(container, slug) {
@@ -74,7 +138,7 @@ export function renderPost(container, slug) {
 
     container.innerHTML = `
         <div class="post-detail">
-            <a href="#" class="back-button">Back to Home</a>
+            <a href="#/blog" class="back-button">Back to Blog</a>
             <h1>${post.attributes.title}</h1>
             <div class="post-meta">
                 <span>${post.attributes.date}</span>
@@ -82,6 +146,30 @@ export function renderPost(container, slug) {
             </div>
             <div class="post-content">
                 ${processHtml(post.html)}
+            </div>
+        </div>
+        `;
+}
+
+export function renderProject(container, slug) {
+    const path = `../content/projects/${slug}.md`;
+    const project = projects[path];
+
+    if (!project) {
+        render404(container);
+        return;
+    }
+
+    container.innerHTML = `
+        <div class="post-detail">
+            <a href="#/projects" class="back-button">Back to Projects</a>
+            <h1>${project.attributes.title}</h1>
+            <div class="post-meta">
+                <span>${project.attributes.date}</span>
+                ${project.attributes.author ? `<span class="author">by ${project.attributes.author}</span>` : ''}
+            </div>
+            <div class="post-content">
+                ${processHtml(project.html)}
             </div>
         </div>
         `;
@@ -98,7 +186,7 @@ export function renderPage(container, slug) {
 
     container.innerHTML = `
         <div class="post-detail">
-            <a href="#" class="back-button">Back to Home</a>
+            <a href="#/" class="back-button">Back to Home</a>
             <h1>${page.attributes.title}</h1>
             <div class="post-content">
                 ${processHtml(page.html)}
@@ -112,7 +200,7 @@ export function render404(container) {
         <div class="post-detail" style="text-align: center;">
             <h1>404 - Page Not Found</h1>
             <p>The content you are looking for does not exist.</p>
-            <a href="#" class="back-button">Return to Home</a>
+            <a href="#/" class="back-button">Return to Home</a>
         </div>
     `;
 }

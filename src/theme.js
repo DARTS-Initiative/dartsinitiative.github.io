@@ -20,23 +20,22 @@ export function toggleTheme() {
 }
 
 export function setupThemeToggle() {
-    // Create button
-    const btn = document.createElement('button');
-    btn.className = 'theme-btn';
-    btn.ariaLabel = 'Toggle Dark Mode';
-    document.body.appendChild(btn);
+    // Get existing button
+    const btn = document.getElementById('theme-toggle');
+    if (!btn) return;
+
+    /* Removed manual button creation since it is now in HTML */
 
     const updateIcon = () => {
-        const currentTheme = document.documentElement.getAttribute('data-theme');
-        const isDark = currentTheme === 'dark';
-        btn.innerHTML = isDark ? '🌙' : '☀';
+        // Icons are now handled by CSS display property based on data-theme
+        // But we can keep this empty or remove it if not needed for anything else.
+        // Actually, my CSS relies on data-theme separate from icon content since I put SVGs in HTML.
+        // So I don't need to change innerHTML here.
     };
 
-    // Initial icon
-    updateIcon();
+    // Initial check (CSS handles visibility)
 
     btn.addEventListener('click', () => {
         toggleTheme();
-        updateIcon();
     });
 }
