@@ -20,7 +20,10 @@ export function renderHome(container) {
         return `
             <a href="#/post/${slug}" class="post-card" data-slug="${slug}">
                 <h3>${post.attributes.title}</h3>
-                <div class="post-meta">${post.attributes.date}</div>
+                <div class="post-meta">
+                    <span>${post.attributes.date}</span>
+                    ${post.attributes.author ? `<span class="author">by ${post.attributes.author}</span>` : ''}
+                </div>
                 <p>${post.attributes.excerpt || ''}</p>
             </a>
         `;
@@ -73,7 +76,10 @@ export function renderPost(container, slug) {
         <div class="post-detail">
             <a href="#" class="back-button">Back to Home</a>
             <h1>${post.attributes.title}</h1>
-            <div class="post-meta">${post.attributes.date}</div>
+            <div class="post-meta">
+                <span>${post.attributes.date}</span>
+                ${post.attributes.author ? `<span class="author">by ${post.attributes.author}</span>` : ''}
+            </div>
             <div class="post-content">
                 ${processHtml(post.html)}
             </div>

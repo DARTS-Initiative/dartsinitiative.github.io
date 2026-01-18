@@ -2,13 +2,11 @@
 title: "Introduction"
 ---
 
-DARTS (Distributed Autonomous Resilient Team of Swarms) is a cutting-edge initiative designed to revolutionize the capabilities of drone swarms.
+DARTS (Distributed Autonomous Resilient Team of Swarms) is a cutting-edge initiative designed to democratize access to advanced swarm technology.
 
-![Drone Swarm|100px](/images/drone-swarm.png)
 
-Our mission is to create a **robust, open-source ecosystem** that enables:
-*   **Research**: Leading edge algorithms.
-*   **Development**: High-performance hardware.
-*   **Deployment**: Real-world autonomous systems.
+### The Mission
+The project bridges the gap in a fragmented and predominantly proprietary field by providing high-value resources to **startups, hobbyists, researchers, and organizations**. Our goal is to accelerate the drone revolution, ensuring that the next generation of breakthroughs remains open and accessible to all.
 
-Scalable, resilient, and collaborative.
+### Future Work
+Currently in its early stages, we will soon publish the **Manifesto**, **Core Objectives**, and a detailed **Development Roadmap**. Stay tuned as we build the foundation for the future of autonomous swarms.
