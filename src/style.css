@@ -17,9 +17,48 @@
 
     /* Glassmorphism Variables */
     --glass-bg: rgba(255, 255, 255, 0.08);
+    /* Fallback */
     --glass-border: rgba(255, 255, 255, 0.5);
     --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
     --glass-blur: blur(12px);
+
+    /* Unified Box Background - Light */
+    /* Restoring original specific values for Light Mode */
+    --section-bg: rgba(255, 255, 255, 0.12);
+    --card-bg: rgba(255, 255, 255, 0.2);
+    --detail-bg: rgba(255, 255, 255, 0.6);
+    --intro-bg: rgba(255, 255, 255, 0.08);
+    /* Subtler than other boxes */
+
+    /* Fallback/Default for other boxes if needed */
+    --box-bg: rgba(255, 255, 255, 0.2);
+    --text-muted: #666;
+    --code-bg: rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="dark"] {
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
+    --title-color: #f5f5f5;
+    --accent-color: #d4b475;
+    --link-color: #4da3ff;
+    --footer-bg: rgba(20, 20, 20, 0.95);
+    --footer-text: #ccc;
+
+    /* Glassmorphism Variables Dark */
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+
+    /* Unified Box Background - Dark */
+    /* In dark mode, we keep them UNIFIED as per request */
+    --box-bg: rgba(30, 30, 30, 0.6);
+    --section-bg: var(--box-bg);
+    --card-bg: var(--box-bg);
+    --detail-bg: var(--box-bg);
+    --intro-bg: rgba(30, 30, 30, 0.3);
+    /* Subtler dark mode background */
+    --text-muted: #aaa;
+    --code-bg: rgba(255, 255, 255, 0.1);
 }
 
 body {
@@ -43,7 +82,7 @@ body {
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 1500px;
     margin: 0 auto;
     padding: 60px 20px;
     text-align: center;
@@ -75,21 +114,26 @@ body {
     font-family: 'Indie Flower', cursive;
     font-size: clamp(1.4em, 3vw, 1.8em);
     font-weight: bold;
-    color: #444;
+    color: var(--text-muted);
     margin-bottom: 50px;
     line-height: 1.4;
-    max-width: 800px;
+    max-width: 900px;
     margin-left: auto;
     margin-right: auto;
 }
 
 /* Glassmorphism Common Style */
-.glass-panel,
-.intro-section,
-.section-box,
-.post-card,
+.post-card {
+    background: var(--card-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: 16px;
+}
+
 .post-detail {
-    background: var(--glass-bg);
+    background: var(--detail-bg);
     backdrop-filter: var(--glass-blur);
     -webkit-backdrop-filter: var(--glass-blur);
     border: 1px solid var(--glass-border);
@@ -105,8 +149,15 @@ body {
     line-height: 1.8;
     color: var(--title-color);
     padding: 40px;
-    max-width: 1100px;
+    max-width: 1300px;
+    /* Subtle Glassmorphism */
+    background: var(--intro-bg);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid var(--glass-border);
     border-left: 6px solid var(--accent-color);
+    border-radius: 0 16px 16px 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
 /* Sections/Buttons Section */
@@ -157,8 +208,12 @@ body {
     text-decoration: none;
     position: relative;
     overflow: hidden;
-    background: rgba(255, 255, 255, 0.12);
-    /* Slightly more opaque for buttons */
+    background: var(--section-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: 16px;
 }
 
 .section-box::before {
@@ -199,7 +254,7 @@ body {
 .blog-section {
     text-align: center;
     margin: 80px auto;
-    max-width: 1100px;
+    max-width: 1300px;
 }
 
 .blog-section h2 {
@@ -235,15 +290,14 @@ body {
     text-decoration: none;
     color: inherit;
     display: block;
-    border-left: 4px solid transparent;
     /* Prepare for hover */
-    background: rgba(255, 255, 255, 0.2);
+    /* Prepare for hover */
+    background: var(--card-bg);
 }
 
 .post-card:hover {
     transform: translateX(10px);
     border-left: 4px solid var(--accent-color);
-    background: rgba(255, 255, 255, 0.8);
 }
 
 .post-card h3 {
@@ -257,13 +311,13 @@ body {
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: #666;
+    color: var(--text-muted);
     margin-bottom: 15px;
     display: block;
 }
 
 .post-card p {
-    color: #444;
+    color: var(--text-muted);
     font-weight: 500;
     font-size: 1.05rem;
 }
@@ -273,9 +327,10 @@ body {
     text-align: left;
     padding: 60px 40px;
     margin-bottom: 60px;
-    background: rgba(255, 255, 255, 0.6);
-    /* Slightly more opaque for better contrast */
-    max-width: 1100px;
+    padding: 60px 40px;
+    margin-bottom: 60px;
+    background: var(--detail-bg);
+    max-width: 1300px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -293,7 +348,7 @@ body {
 .post-content {
     font-size: 1.15rem;
     line-height: 1.8;
-    color: #333;
+    color: var(--text-color);
 }
 
 /* Hide duplicate title from Markdown content */
@@ -348,12 +403,12 @@ body {
     border-radius: 0 12px 12px 0;
     margin: 35px 0;
     font-style: italic;
-    color: #555;
+    color: var(--text-muted);
     font-size: 1.2em;
 }
 
 .post-content code {
-    background: rgba(0, 0, 0, 0.06);
+    background: var(--code-bg);
     padding: 2px 6px;
     border-radius: 4px;
     font-family: 'Consolas', 'Monaco', monospace;
@@ -433,7 +488,9 @@ body {
     border: 1px solid rgba(44, 62, 80, 0.1);
     border-radius: 30px;
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    background: rgba(255, 255, 255, 0.6);
+    border-radius: 30px;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background: var(--detail-bg);
     backdrop-filter: blur(4px);
 }
 
@@ -469,7 +526,7 @@ footer {
 }
 
 .footer-content {
-    max-width: 1200px;
+    max-width: 1500px;
     margin: 0 auto;
     text-align: center;
 }
@@ -490,15 +547,43 @@ footer {
 }
 
 .footer-links a {
-    color: #ccc;
+    color: var(--footer-text);
     text-decoration: none;
     font-weight: 500;
     transition: color 0.2s;
 }
 
+
 .footer-links a:hover {
     color: var(--accent-color);
     text-decoration: none;
+}
+
+/* Floating Theme Toggle */
+.theme-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--footer-bg);
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.theme-btn:hover {
+    transform: scale(1.1);
+    background: var(--accent-color);
+    color: var(--bg-color);
 }
 
 @media (max-width: 768px) {
