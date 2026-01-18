@@ -1,16 +1,1 @@
-{
-  "meta": {
-    "total": 1,
-    "generatedAt": "2026-01-18T21:22:13.329Z"
-  },
-  "posts": [
-    {
-      "slug": "test-deployment",
-      "title": "Testing Automatic Deployment",
-      "date": "2026-01-18",
-      "category": "Updates",
-      "author": "DARTS Team",
-      "excerpt": "This is a test post to verify that the automatic deployment pipeline works correctly."
-    }
-  ]
-}
+{"meta":{"total":0},"items":[]}
