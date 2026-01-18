@@ -192,23 +192,23 @@ export function renderPage(container, slug) {
     }
 
     container.innerHTML = `
-        < div class="post-detail" >
+        <div class="post-detail">
             <a href="#/" class="back-button">Back to Home</a>
             <h1>${page.attributes.title}</h1>
             <div class="post-content">
                 ${processHtml(page.html)}
             </div>
-        </div >
+        </div>
         `;
 }
 
 export function render404(container) {
     container.innerHTML = `
-        < div class="post-detail" style = "text-align: center;" >
+        <div class="post-detail" style="text-align: center;">
             <h1>404 - Page Not Found</h1>
             <p>The content you are looking for does not exist.</p>
             <a href="#/" class="back-button">Return to Home</a>
-        </div >
+        </div>
         `;
 }
 
@@ -220,7 +220,7 @@ function processHtml(html) {
         const cleanSize = size.trim();
         // Basic validation for CSS size units
         if (/^\d+(px|%|em|rem|vw|vh)$/.test(cleanSize)) {
-            return `< img ${prefix}${alt} " style="width: 100 %; max - width: ${cleanSize}; " ${suffix}`;
+            return `<img ${prefix}${alt}" style="width: 100%; max-width: ${cleanSize};" ${suffix}`;
         }
         return match;
     });
