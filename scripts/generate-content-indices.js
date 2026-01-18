@@ -50,13 +50,8 @@ function generateIndex(sourceDir, outputFile, type) {
 
     const output = {
         meta: stats,
-        items
+        [type]: items  // Usar el tipo como clave: 'posts' o 'projects'
     };
-
-    if (type === 'posts') {
-        output.posts = items; // Maintain backward compatibility for now if needed, or unify
-        delete output.items;
-    }
 
     fs.writeFileSync(outputFile, JSON.stringify(output, null, 2));
     console.log(`Generated index for ${items.length} ${type} at ${outputFile}`);

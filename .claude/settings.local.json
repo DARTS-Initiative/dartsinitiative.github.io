@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__filesystem__directory_tree",
+      "Bash(xargs:*)",
+      "Bash(xargs ls:*)",
+      "Bash(wc:*)",
+      "Bash(npm run generate-indices:*)",
+      "Bash(npm install)",
+      "Bash(npm run dev:*)",
+      "Bash(curl:*)"
+    ]
+  }
+}

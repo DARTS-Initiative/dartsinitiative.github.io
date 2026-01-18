@@ -1,0 +1,14 @@
+{
+  "meta": {
+    "total": 1,
+    "generatedAt": "2026-01-18T20:38:15.292Z"
+  },
+  "projects": [
+    {
+      "slug": "first-project",
+      "title": "Autonomous Drone Swarm Project",
+      "logo": "/images/drone-swarm.png",
+      "excerpt": "A pioneering project focusing on decentralized swarm coordination."
+    }
+  ]
+}

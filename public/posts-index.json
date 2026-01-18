@@ -1,0 +1,23 @@
+{
+  "meta": {
+    "total": 2,
+    "generatedAt": "2026-01-18T20:38:15.291Z"
+  },
+  "posts": [
+    {
+      "slug": "welcome-to-darts",
+      "title": "Welcome to DARTS",
+      "date": "2026-01-18",
+      "author": "DARTS Team",
+      "excerpt": "Welcome to the official launch of the DARTS Initiative. Our mission is to build the future of autonomous drone colonies through open-source innovation and collaboration."
+    },
+    {
+      "slug": "toilet",
+      "title": "Toiletazo",
+      "date": "2025-01-18",
+      "category": "News",
+      "author": "DARTS Team",
+      "excerpt": "Welcome to the official launch of the DARTS Initiative. Our mission is to build the future of autonomous drone colonies through open-source innovation and collaboration."
+    }
+  ]
+}
