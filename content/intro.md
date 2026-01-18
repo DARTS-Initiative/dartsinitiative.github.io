@@ -2,7 +2,7 @@
 title: "Introduction"
 ---
 
-DARTS (Distributed Autonomous Resilient Team of Swarms) is a cutting-edge initiative designed to democratize access to advanced swarm technology.
+DARTS (Drone Autonomous Research and Technology for Swarms) is a cutting-edge initiative designed to democratize access to advanced swarm technology.
 
 
 ### The Mission
