@@ -847,3 +847,15 @@ footer {
         width: 100%;
     }
 }
+
+/* No Content Message */
+.no-content-message {
+    color: var(--text-muted);
+    font-style: italic;
+    text-align: center;
+    padding: 40px;
+    font-size: 1.2rem;
+    background: var(--box-bg);
+    border-radius: 12px;
+    border: 1px dashed var(--glass-border);
+}

@@ -1,0 +1,75 @@
+import { config } from '../config.js';
+import { updateSeo } from '../seo.js';
+import { processHtml } from './base.js';
+import { getPostsIndex, getCategoryStyleString } from './postRenderer.js';
+import { getPages } from './pageRenderer.js';
+
+const intro = import.meta.glob('../../content/intro.md', { eager: true });
+
+export function renderHome(container) {
+    updateSeo(null, config.siteDescription);
+
+    const pages = getPages();
+    const postsIndex = getPostsIndex();
+
+    const sectionsHtml = Object.entries(pages).map(([path, page]) => {
+        const slug = path.split('/').pop().replace('.md', '');
+        return `
+        <a href="#/page/${slug}" class="section-box">
+            <h3>${page.attributes.title}</h3>
+        </a>
+    `;
+    }).join('');
+
+    const postsHtml = postsIndex.slice(0, 2).map((post) => {
+        const slug = post.slug;
+        return `
+            <a href="#/post/${slug}" class="post-card" data-slug="${slug}">
+                <h3>${post.title}</h3>
+                <div class="post-meta" style="${getCategoryStyleString(post.category)}">
+                    <span class="category-name">${post.category || 'Others'}</span>
+                    <span class="separator">|</span>
+                    <span>${post.date}</span>
+                    ${post.author ? `<span class="separator">|</span><span class="author">by ${post.author}</span>` : ''}
+                </div>
+                <p>${post.excerpt || ''}</p>
+            </a>
+        `;
+    }).join('');
+
+    const introContent = processHtml(intro['../../content/intro.md']?.html);
+
+    container.innerHTML = `
+    <img src="${config.logo.src}" alt="${config.logo.alt}" class="logo">
+        <h1 class="title">${config.siteTitle}</h1>
+        <p class="description">${config.siteDescription}</p>
+
+        <div class="intro-section">
+            ${introContent}
+        </div>
+
+        <div class="buttons-section">
+            <h2>Explore the Ecosystem</h2>
+            <div class="buttons-list">
+                ${sectionsHtml}
+            </div>
+        </div>
+
+        <div class="blog-section">
+            <h2>${config.blog.title}</h2>
+            <div class="posts-list">
+                ${postsHtml || '<p class="no-content-message">No news available yet.</p>'}
+            </div>
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="#/blog" class="text-link">View All Posts →</a>
+            </div>
+        </div>
+
+        <div class="info-text">
+            <p>
+                Interested in learning more? Check out our
+                <a href="${config.footer.links[0].url}" target="_blank">GitHub repository</a>.
+            </p>
+        </div>
+        `;
+}

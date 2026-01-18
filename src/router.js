@@ -1,4 +1,8 @@
-import { renderHome, renderPost, renderPage, renderBlog, renderProjects, renderProject, render404 } from './renderer.js';
+import { renderHome } from './renderers/homeRenderer.js';
+import { renderPost, renderBlog } from './renderers/postRenderer.js';
+import { renderProjects, renderProject } from './renderers/projectRenderer.js';
+import { renderPage } from './renderers/pageRenderer.js';
+import { render404 } from './renderers/base.js';
 
 export function initRouter(containerId) {
     const container = document.getElementById(containerId);
@@ -16,7 +20,7 @@ export function initRouter(containerId) {
         }
     }
 
-    function handleRoute() {
+    async function handleRoute() {
         const hash = window.location.hash;
 
         // Scroll to top on navigation
@@ -32,10 +36,10 @@ export function initRouter(containerId) {
             renderProjects(container);
         } else if (hash.startsWith('#/post/')) {
             const slug = hash.replace('#/post/', '');
-            renderPost(container, slug);
+            await renderPost(container, slug);
         } else if (hash.startsWith('#/project/')) {
             const slug = hash.replace('#/project/', '');
-            renderProject(container, slug);
+            await renderProject(container, slug);
         } else if (hash.startsWith('#/page/')) {
             const slug = hash.replace('#/page/', '');
             renderPage(container, slug);
