@@ -10,21 +10,29 @@ export function initBackground(canvasId) {
     let mouseX = -1000;
     let mouseY = -1000;
 
+    // Detectar si es dispositivo móvil
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) 
+        || ('ontouchstart' in window) 
+        || (navigator.maxTouchPoints > 0);
+
     window.addEventListener('resize', () => {
         width = canvas.width = window.innerWidth;
         height = canvas.height = window.innerHeight;
         createTriangles();
     });
 
-    window.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-    });
+    // Solo activar eventos de ratón en desktop
+    if (!isMobile) {
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
 
-    window.addEventListener('mouseleave', () => {
-        mouseX = -1000;
-        mouseY = -1000;
-    });
+        window.addEventListener('mouseleave', () => {
+            mouseX = -1000;
+            mouseY = -1000;
+        });
+    }
 
     // Listener para actualizar colores cuando cambia el tema
     const observer = new MutationObserver(() => {
@@ -60,6 +68,10 @@ export function initBackground(canvasId) {
         rows: 16,
         hoverRadius: 90,
         transitionSpeed: 0.1, // Reduced for smoother effect
+        // Opciones para el destello aleatorio en móvil
+        mobileGlowChance: 0.0003, // Probabilidad baja de que un triángulo se ilumine
+        mobileGlowFadeInSpeed: 0.04, // Velocidad de aparición (fade in lento)
+        mobileGlowFadeOutSpeed: 0.015, // Velocidad de desvanecimiento (fade out)
     };
 
     let triangles = [];
@@ -71,6 +83,8 @@ export function initBackground(canvasId) {
             this.size = triangleOptions.size;
             this.speed = triangleOptions.speed + (Math.random() - 0.5) * 0.2;
             this.hoverAmount = 0;
+            this.isGlowing = false; // Para el efecto de destello en móvil
+            this.glowPhase = 'idle'; // 'idle', 'fadeIn', 'fadeOut'
         }
 
         isMouseNear() {
@@ -105,10 +119,32 @@ export function initBackground(canvasId) {
                 this.x = -this.size * 2;
             }
 
-            if (this.isMouseNear()) {
-                this.hoverAmount = Math.min(1, this.hoverAmount + triangleOptions.transitionSpeed);
+            if (isMobile) {
+                // En móvil: destello aleatorio con fade in y fade out
+                if (this.glowPhase === 'idle' && Math.random() < triangleOptions.mobileGlowChance) {
+                    this.glowPhase = 'fadeIn';
+                }
+                
+                if (this.glowPhase === 'fadeIn') {
+                    // Aparecer lentamente
+                    this.hoverAmount = Math.min(1, this.hoverAmount + triangleOptions.mobileGlowFadeInSpeed);
+                    if (this.hoverAmount >= 1) {
+                        this.glowPhase = 'fadeOut';
+                    }
+                } else if (this.glowPhase === 'fadeOut') {
+                    // Desvanecer lentamente
+                    this.hoverAmount = Math.max(0, this.hoverAmount - triangleOptions.mobileGlowFadeOutSpeed);
+                    if (this.hoverAmount <= 0) {
+                        this.glowPhase = 'idle';
+                    }
+                }
             } else {
-                this.hoverAmount = Math.max(0, this.hoverAmount - triangleOptions.transitionSpeed);
+                // En desktop: seguir el ratón
+                if (this.isMouseNear()) {
+                    this.hoverAmount = Math.min(1, this.hoverAmount + triangleOptions.transitionSpeed);
+                } else {
+                    this.hoverAmount = Math.max(0, this.hoverAmount - triangleOptions.transitionSpeed);
+                }
             }
         }
     }
