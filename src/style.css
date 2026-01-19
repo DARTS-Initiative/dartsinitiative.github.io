@@ -214,12 +214,14 @@ body {
 .title {
     font-family: "Goldman", sans-serif;
     font-weight: 700;
-    font-size: clamp(3em, 8vw, 6em);
+    font-size: clamp(2em, 8vw, 6em);
     /* Slightly larger */
     color: var(--title-color);
     margin-bottom: 10px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
     letter-spacing: 2px;
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 
 .description {
@@ -283,15 +285,18 @@ body {
 }
 
 .intro-section h1 {
-    font-size: 2.5rem;
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    overflow-wrap: break-word;
 }
 
 .intro-section h2 {
-    font-size: 2.2rem;
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    overflow-wrap: break-word;
 }
 
 .intro-section h3 {
-    font-size: 1.8rem;
+    font-size: clamp(1.2rem, 3.5vw, 1.8rem);
+    overflow-wrap: break-word;
 }
 
 /* Sections/Buttons Section */
@@ -302,12 +307,13 @@ body {
 
 .buttons-section h2 {
     font-family: 'Goldman', sans-serif;
-    font-size: 2.5rem;
+    font-size: clamp(1.8rem, 6vw, 2.5rem);
     color: var(--title-color);
     margin-bottom: 50px;
     display: inline-block;
     position: relative;
     z-index: 1;
+    overflow-wrap: break-word;
 }
 
 .buttons-section h2::after {
@@ -376,12 +382,14 @@ body {
 .section-box h3 {
     font-family: 'Goldman', sans-serif;
     color: var(--title-color);
-    font-size: 1.4rem;
+    font-size: clamp(1rem, 5vw, 1.4rem);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
     position: relative;
     z-index: 2;
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 
 /* Blog Section */
@@ -393,10 +401,11 @@ body {
 
 .blog-section h2 {
     font-family: 'Goldman', sans-serif;
-    font-size: 2.5rem;
+    font-size: clamp(1.8rem, 6vw, 2.5rem);
     color: var(--title-color);
     margin-bottom: 50px;
     position: relative;
+    overflow-wrap: break-word;
 }
 
 .blog-section h2::after {
@@ -438,7 +447,9 @@ body {
     font-family: 'Goldman', sans-serif;
     color: var(--title-color);
     margin-bottom: 10px;
-    font-size: 1.6rem;
+    font-size: clamp(1.2rem, 4vw, 1.6rem);
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 
 .post-card .post-meta {
@@ -472,12 +483,14 @@ body {
 
 .post-detail h1 {
     font-family: 'Goldman', sans-serif;
-    font-size: 3rem;
+    font-size: clamp(1.8rem, 6vw, 3rem);
     color: var(--title-color);
     margin-bottom: 25px;
     line-height: 1.2;
     text-transform: uppercase;
     letter-spacing: 1px;
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 
 .post-content {
@@ -502,7 +515,9 @@ body {
 }
 
 .post-content h1 {
-    font-size: 2.2em;
+    font-size: clamp(1.5rem, 5vw, 2.2em);
+    overflow-wrap: break-word;
+    word-break: break-word;
     border-bottom: 2px solid var(--accent-color);
     padding-bottom: 10px;
     display: inline-block;
@@ -810,8 +825,10 @@ footer {
 }
 
 .project-info h3 {
-    font-size: 2rem;
+    font-size: clamp(1.4rem, 5vw, 2rem);
     margin-bottom: 15px;
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 
 .project-logo-container {
