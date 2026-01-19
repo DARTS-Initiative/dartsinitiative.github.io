@@ -1,5 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Goldman:wght@400;700&family=Indie+Flower&family=Open+Sans:wght@400;600&display=swap');
 
+/* Font fallback metrics to reduce CLS */
+@font-face {
+    font-family: 'Goldman-fallback';
+    src: local('Arial');
+    ascent-override: 95%;
+    descent-override: 25%;
+    line-gap-override: 0%;
+    size-adjust: 105%;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -98,6 +108,9 @@ body {
     margin: 20px auto 0 auto;
     border-radius: 50px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    /* Prevent CLS */
+    min-height: 50px;
+    contain: layout;
 }
 
 [data-theme="dark"] .top-nav {
@@ -128,6 +141,10 @@ body {
     text-transform: uppercase;
     transition: color 0.3s ease;
     letter-spacing: 1px;
+    /* Prevent CLS by reserving space */
+    min-width: max-content;
+    min-height: 1.5em;
+    display: inline-block;
 }
 
 .nav-link:hover,
@@ -183,6 +200,8 @@ body {
     z-index: 1;
     flex: 1;
     width: 100%;
+    /* Prevent CLS during content load */
+    min-height: 50vh;
 }
 
 .logo {
@@ -699,6 +718,9 @@ footer {
     position: relative;
     z-index: 2;
     border-top: 4px solid var(--accent-color);
+    /* Prevent CLS by reserving minimum space */
+    min-height: 120px;
+    contain: layout style;
 }
 
 .footer-content {
