@@ -10,7 +10,7 @@ export async function initProjects() {
         const response = await fetch('/projects-index.json');
         if (!response.ok) throw new Error('Failed to load projects index');
         const data = await response.json();
-        projectsIndex = data.projects;
+        projectsIndex = data.projects || [];
         console.log('Projects index loaded:', projectsIndex.length, 'projects');
     } catch (e) {
         console.error('Error loading projects index:', e);
