@@ -26,6 +26,15 @@ export function initBackground(canvasId) {
         mouseY = -1000;
     });
 
+    // Listener para actualizar colores cuando cambia el tema
+    const observer = new MutationObserver(() => {
+        triangleOptions.baseColor = getBaseColor();
+    });
+    observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['data-theme']
+    });
+
     function hexToRgb(hex) {
         const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
         return result ? {
@@ -35,10 +44,18 @@ export function initBackground(canvasId) {
         } : null;
     }
 
+    function getBaseColor() {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        if (isDark) {
+            return { ...hexToRgb('#FFFFFF'), a: 0.03 }; // Blanco con opacidad moderada en modo oscuro
+        }
+        return { ...hexToRgb('#000000'), a: 0.07 }; // Negro con poca opacidad en modo claro
+    }
+
     const triangleOptions = {
         size: 40,
         speed: 0.18,
-        baseColor: { ...hexToRgb('#000000'), a: 0.07 },
+        baseColor: getBaseColor(),
         hoverColor: { ...hexToRgb('#C2A365'), a: 0.65 },
         rows: 16,
         hoverRadius: 90,
