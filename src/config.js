@@ -10,8 +10,16 @@ export const config = {
     siteDescription: "DARTS is an open ecosystem for the research and development of autonomous, resilient, and scalable drone swarms.",
 
     // Configuración del Logo
+    // Configuración del Logo
     logo: {
-        src: "/images/logo_small.png",
+        light: {
+            svg: "/images/darts_logo.svg",
+            png: "/images/darts_logo.png"
+        },
+        dark: {
+            svg: "/images/darts_logo_black.svg",
+            png: "/images/darts_logo_black.png"
+        },
         alt: "DARTS Initiative Logo"
     },
 
