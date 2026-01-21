@@ -44,12 +44,16 @@ export function renderHome(container) {
             src="${config.logo.light.svg}" 
             alt="${config.logo.alt}" 
             class="logo logo-light"
+            width="500"
+            height="500"
             onerror="this.onerror=null; this.src='${config.logo.light.png}'"
         >
         <img 
             src="${config.logo.dark.svg}" 
             alt="${config.logo.alt}" 
             class="logo logo-dark"
+            width="500"
+            height="500"
             onerror="this.onerror=null; this.src='${config.logo.dark.png}'"
         >
         <h1 class="title">${config.siteTitle}</h1>

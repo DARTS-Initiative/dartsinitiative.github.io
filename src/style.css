@@ -207,6 +207,7 @@ body {
 .logo {
     width: clamp(100px, 20vw, 220px);
     height: auto;
+    aspect-ratio: 1 / 1;
     margin-bottom: 20px;
     filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
 }
