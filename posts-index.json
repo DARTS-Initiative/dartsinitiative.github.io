@@ -1,7 +1,16 @@
 {
   "meta": {
-    "total": 0,
-    "generatedAt": "2026-03-11T19:51:22.117Z"
+    "total": 1,
+    "generatedAt": "2026-03-11T20:48:04.945Z"
   },
-  "posts": []
+  "posts": [
+    {
+      "slug": "demo-post",
+      "title": "Welcome to DARTS",
+      "date": "2026-03-11",
+      "category": "News",
+      "author": "Pablo Magarinos Docampo",
+      "excerpt": "DARTS begins as a personal project focused on advancing AI in real-world environments and opening that work to public collaboration."
+    }
+  ]
 }
