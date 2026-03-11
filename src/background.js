@@ -55,7 +55,7 @@ export function initBackground(canvasId) {
     function getBaseColor() {
         const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
         if (isDark) {
-            return { ...hexToRgb('#FFFFFF'), a: 0.03 }; // Blanco con opacidad moderada en modo oscuro
+            return { ...hexToRgb('#FFFFFF'), a: 0.018 }; // Más sutil para que el fondo oscuro se perciba casi negro
         }
         return { ...hexToRgb('#000000'), a: 0.07 }; // Negro con poca opacidad en modo claro
     }

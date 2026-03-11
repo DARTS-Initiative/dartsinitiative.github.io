@@ -1,6 +1,6 @@
 export const config = {
-    siteTitle: "DARTS Initiative",
-    siteDescription: "DARTS is an open ecosystem for the research and development of autonomous, resilient, and scalable drone swarms.",
+    siteTitle: "DARTS",
+    siteDescription: "Open ecosystem to research and share advances in <strong>AI that understands</strong>.",
 
     logo: {
         light: {
@@ -11,7 +11,7 @@ export const config = {
             svg: "/images/darts_logo_black.svg",
             png: "/images/darts_logo_black.png"
         },
-        alt: "DARTS Initiative Logo"
+        alt: "DARTS Logo"
     },
 
     blog: {

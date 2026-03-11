@@ -1,6 +1,6 @@
 export function updateSeo(title, description) {
     // Update Title
-    document.title = title ? `${title} | DARTS Initiative` : 'DARTS Initiative';
+    document.title = title ? `${title} | DARTS` : 'DARTS';
 
     // Update Meta Description
     let metaDescription = document.querySelector('meta[name="description"]');
@@ -17,7 +17,7 @@ export function updateSeo(title, description) {
         if (meta) meta.content = content || '';
     };
 
-    const finalTitle = title ? `${title} | DARTS Initiative` : 'DARTS Initiative';
+    const finalTitle = title ? `${title} | DARTS` : 'DARTS';
     const finalDesc = description || 'Decentralized Autonomous Research & Technology System - Advancing open science and technology.';
 
     updateMeta('og:title', finalTitle);
