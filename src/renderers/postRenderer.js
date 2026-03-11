@@ -1,4 +1,3 @@
-import { config } from '../config.js';
 import { categories } from '../categories.js';
 import { updateSeo } from '../seo.js';
 import { processHtml, render404 } from './base.js';

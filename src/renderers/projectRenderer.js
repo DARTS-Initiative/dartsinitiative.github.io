@@ -1,4 +1,3 @@
-import { config } from '../config.js';
 import { updateSeo } from '../seo.js';
 import { processHtml, render404 } from './base.js';
 
@@ -16,10 +15,6 @@ export async function initProjects() {
         console.error('Error loading projects index:', e);
         projectsIndex = [];
     }
-}
-
-export function getProjectsIndex() {
-    return projectsIndex;
 }
 
 export function renderProjects(container) {

@@ -20,7 +20,14 @@ function generateIndex(sourceDir, outputFile, type) {
 
     if (!fs.existsSync(sourceDir)) {
         console.warn(`Directory not found: ${sourceDir}`);
-        fs.writeFileSync(outputFile, JSON.stringify({ meta: { total: 0 }, items: [] }));
+        const emptyOutput = {
+            meta: {
+                total: 0,
+                generatedAt: new Date().toISOString()
+            },
+            [type]: []
+        };
+        fs.writeFileSync(outputFile, JSON.stringify(emptyOutput, null, 2));
         return;
     }
 
