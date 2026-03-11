@@ -2,11 +2,17 @@
 title: "Introduction"
 ---
 
-DARTS (Drone Autonomous Research and Technology for Swarms) is a cutting-edge initiative designed to democratize access to advanced swarm technology.
+# Why DARTS
 
+Current generative AI achieves incredible things, but it learns passively: consuming massive amounts of data without grounding its knowledge in reality. My goal is to explore and share advances in AI that truly reasons, that understands what it observes, and that builds its own model of the world.
 
-### The Mission
-The project bridges the gap in a fragmented and predominantly proprietary field by providing high-value resources to **startups, hobbyists, researchers, and organizations**. Our goal is to accelerate the drone revolution, ensuring that the next generation of breakthroughs remains open and accessible to all.
+# Main lines
 
-### Future Work
-Currently in its early stages, we will soon publish the **Manifesto**, **Core Objectives**, and a detailed **Development Roadmap**. Stay tuned as we build the foundation for the future of autonomous swarms.
+The areas this initiative focuses on:
+- **World Models**, enabling AI to *dream* realities and plan based on them.
+- **Causal Learning**, enabling AI to *understand* reality through exploration and observation.
+- **Multi-Agent AI**, developing native capabilities for collaboration, communication, and collective planning.
+
+# Want to join?
+
+That is the reason why DARTS exists. Check below how to contribute.

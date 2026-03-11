@@ -64,7 +64,7 @@ export function renderHome(container) {
         </div>
 
         <div class="buttons-section">
-            <h2>Explore the Ecosystem</h2>
+            <h2>Explore DARTS</h2>
             <div class="buttons-list">
                 ${sectionsHtml}
             </div>
