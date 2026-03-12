@@ -10,9 +10,8 @@ export function initBackground(canvasId) {
     let mouseX = -1000;
     let mouseY = -1000;
 
-    // Detectar si es dispositivo móvil
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) 
-        || ('ontouchstart' in window) 
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+        || ('ontouchstart' in window)
         || (navigator.maxTouchPoints > 0);
 
     window.addEventListener('resize', () => {
@@ -21,7 +20,6 @@ export function initBackground(canvasId) {
         createTriangles();
     });
 
-    // Solo activar eventos de ratón en desktop
     if (!isMobile) {
         window.addEventListener('mousemove', (e) => {
             mouseX = e.clientX;
@@ -34,9 +32,8 @@ export function initBackground(canvasId) {
         });
     }
 
-    // Listener para actualizar colores cuando cambia el tema
     const observer = new MutationObserver(() => {
-        triangleOptions.baseColor = getBaseColor();
+        options.baseColor = getBaseColor();
     });
     observer.observe(document.documentElement, {
         attributes: true,
@@ -55,95 +52,128 @@ export function initBackground(canvasId) {
     function getBaseColor() {
         const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
         if (isDark) {
-            return { ...hexToRgb('#FFFFFF'), a: 0.018 }; // Más sutil para que el fondo oscuro se perciba casi negro
+            return { ...hexToRgb('#FFFFFF'), a: 0.022 };
         }
-        return { ...hexToRgb('#000000'), a: 0.07 }; // Negro con poca opacidad en modo claro
+        return { ...hexToRgb('#000000'), a: 0.1 };
     }
 
-    const triangleOptions = {
-        size: 40,
-        speed: 0.18,
+    const options = {
         baseColor: getBaseColor(),
-        hoverColor: { ...hexToRgb('#C2A365'), a: 0.65 },
-        rows: 16,
-        hoverRadius: 90,
-        transitionSpeed: 0.1, // Reduced for smoother effect
-        // Opciones para el destello aleatorio en móvil
-        mobileGlowChance: 0.0003, // Probabilidad baja de que un triángulo se ilumine
-        mobileGlowFadeInSpeed: 0.04, // Velocidad de aparición (fade in lento)
-        mobileGlowFadeOutSpeed: 0.015, // Velocidad de desvanecimiento (fade out)
+        hoverColor: { ...hexToRgb('#C2A365'), a: 0.55 },
+        hoverRadius: 160,
+        transitionSpeed: 0.06,
+        mobileGlowChance: 0.0002,
+        mobileGlowFadeInSpeed: 0.025,
+        mobileGlowFadeOutSpeed: 0.01,
+        // Layers create depth: smaller/slower = further away
+        layers: [
+            { count: 0.3, sizeRange: [12, 20], speedFactor: 0.4, opacityMult: 0.5 },
+            { count: 0.4, sizeRange: [22, 34], speedFactor: 0.7, opacityMult: 0.75 },
+            { count: 0.3, sizeRange: [36, 50], speedFactor: 1.0, opacityMult: 1.0 },
+        ],
+        totalCount: isMobile ? 180 : 300,
     };
 
     let triangles = [];
+    let time = 0;
 
     class Triangle {
-        constructor(x, y) {
+        constructor(x, y, layer) {
+            this.originX = x;
+            this.originY = y;
             this.x = x;
             this.y = y;
-            this.size = triangleOptions.size;
-            this.speed = triangleOptions.speed + (Math.random() - 0.5) * 0.2;
+            this.layer = layer;
+            this.size = layer.sizeRange[0] + Math.random() * (layer.sizeRange[1] - layer.sizeRange[0]);
+            this.rotation = Math.random() * Math.PI * 2;
+            this.rotationSpeed = (Math.random() - 0.5) * 0.002 * layer.speedFactor;
             this.hoverAmount = 0;
-            this.isGlowing = false; // Para el efecto de destello en móvil
-            this.glowPhase = 'idle'; // 'idle', 'fadeIn', 'fadeOut'
+            this.glowPhase = 'idle';
+
+            // Each triangle drifts in its own gentle pattern
+            this.driftPhaseX = Math.random() * Math.PI * 2;
+            this.driftPhaseY = Math.random() * Math.PI * 2;
+            this.driftAmplitudeX = 12 + Math.random() * 25 * layer.speedFactor;
+            this.driftAmplitudeY = 10 + Math.random() * 20 * layer.speedFactor;
+            this.driftSpeedX = (0.001 + Math.random() * 0.0015) * layer.speedFactor;
+            this.driftSpeedY = (0.0008 + Math.random() * 0.0012) * layer.speedFactor;
+
+            // Overall drift direction
+            const angle = Math.random() * Math.PI * 2;
+            this.linearDriftX = Math.cos(angle) * 0.12 * layer.speedFactor;
+            this.linearDriftY = Math.sin(angle) * 0.12 * layer.speedFactor;
         }
 
         isMouseNear() {
-            const centerX = this.x + this.size / 2;
-            const centerY = this.y + this.size / 2;
-            const distance = Math.sqrt((mouseX - centerX) ** 2 + (mouseY - centerY) ** 2);
-            return distance < triangleOptions.hoverRadius;
+            const distance = Math.sqrt((mouseX - this.x) ** 2 + (mouseY - this.y) ** 2);
+            return distance < options.hoverRadius;
         }
 
         draw() {
-            const base = triangleOptions.baseColor;
-            const hover = triangleOptions.hoverColor;
+            const base = options.baseColor;
+            const hover = options.hoverColor;
             const t = this.hoverAmount;
+            const layerOpacity = this.layer.opacityMult;
 
             const r = Math.round(base.r + (hover.r - base.r) * t);
             const g = Math.round(base.g + (hover.g - base.g) * t);
             const b = Math.round(base.b + (hover.b - base.b) * t);
-            const a = base.a + (hover.a - base.a) * t;
+            const a = (base.a + (hover.a - base.a) * t) * layerOpacity;
+
+            ctx.save();
+            ctx.translate(this.x, this.y);
+            ctx.rotate(this.rotation);
+
+            const s = this.size;
+            const h = s * 0.866; // equilateral height
 
             ctx.beginPath();
-            ctx.moveTo(this.x, this.y);
-            ctx.lineTo(this.x + this.size, this.y + this.size / 2);
-            ctx.lineTo(this.x, this.y + this.size);
+            ctx.moveTo(0, -h / 2);
+            ctx.lineTo(-s / 2, h / 2);
+            ctx.lineTo(s / 2, h / 2);
             ctx.closePath();
             ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${a})`;
             ctx.fill();
+            ctx.restore();
         }
 
         update() {
-            this.x += this.speed;
-            if (this.x > width + this.size) {
-                this.x = -this.size * 2;
-            }
+            // Organic floating motion
+            this.x = this.originX
+                + Math.sin(time * this.driftSpeedX + this.driftPhaseX) * this.driftAmplitudeX;
+            this.y = this.originY
+                + Math.sin(time * this.driftSpeedY + this.driftPhaseY) * this.driftAmplitudeY;
+
+            // Slow linear drift
+            this.originX += this.linearDriftX;
+            this.originY += this.linearDriftY;
+
+            // Wrap around edges with generous margin
+            const margin = this.size * 2;
+            if (this.originX > width + margin) this.originX = -margin;
+            if (this.originX < -margin) this.originX = width + margin;
+            if (this.originY > height + margin) this.originY = -margin;
+            if (this.originY < -margin) this.originY = height + margin;
+
+            // Gentle rotation
+            this.rotation += this.rotationSpeed;
 
             if (isMobile) {
-                // En móvil: destello aleatorio con fade in y fade out
-                if (this.glowPhase === 'idle' && Math.random() < triangleOptions.mobileGlowChance) {
+                if (this.glowPhase === 'idle' && Math.random() < options.mobileGlowChance) {
                     this.glowPhase = 'fadeIn';
                 }
-                
                 if (this.glowPhase === 'fadeIn') {
-                    // Aparecer lentamente
-                    this.hoverAmount = Math.min(1, this.hoverAmount + triangleOptions.mobileGlowFadeInSpeed);
-                    if (this.hoverAmount >= 1) {
-                        this.glowPhase = 'fadeOut';
-                    }
+                    this.hoverAmount = Math.min(1, this.hoverAmount + options.mobileGlowFadeInSpeed);
+                    if (this.hoverAmount >= 1) this.glowPhase = 'fadeOut';
                 } else if (this.glowPhase === 'fadeOut') {
-                    // Desvanecer lentamente
-                    this.hoverAmount = Math.max(0, this.hoverAmount - triangleOptions.mobileGlowFadeOutSpeed);
-                    if (this.hoverAmount <= 0) {
-                        this.glowPhase = 'idle';
-                    }
+                    this.hoverAmount = Math.max(0, this.hoverAmount - options.mobileGlowFadeOutSpeed);
+                    if (this.hoverAmount <= 0) this.glowPhase = 'idle';
                 }
             } else {
-                // En desktop: seguir el ratón
                 if (this.isMouseNear()) {
-                    this.hoverAmount = Math.min(1, this.hoverAmount + triangleOptions.transitionSpeed);
+                    this.hoverAmount = Math.min(1, this.hoverAmount + options.transitionSpeed);
                 } else {
-                    this.hoverAmount = Math.max(0, this.hoverAmount - triangleOptions.transitionSpeed);
+                    this.hoverAmount = Math.max(0, this.hoverAmount - options.transitionSpeed);
                 }
             }
         }
@@ -151,19 +181,18 @@ export function initBackground(canvasId) {
 
     function createTriangles() {
         triangles = [];
-        const rowHeight = height / triangleOptions.rows;
-
-        for (let i = 0; i < triangleOptions.rows; i++) {
-            const trianglesPerRow = Math.ceil(width / (triangleOptions.size * 2));
-            for (let j = 0; j < trianglesPerRow + 2; j++) {
-                const x = j * (triangleOptions.size * 2) - (triangleOptions.size * 3) + (i % 2 === 0 ? 0 : triangleOptions.size);
-                const y = i * rowHeight + (Math.random() * rowHeight / 4);
-                triangles.push(new Triangle(x, y));
+        for (const layer of options.layers) {
+            const count = Math.round(options.totalCount * layer.count);
+            for (let i = 0; i < count; i++) {
+                const x = Math.random() * (width + 100) - 50;
+                const y = Math.random() * (height + 100) - 50;
+                triangles.push(new Triangle(x, y, layer));
             }
         }
     }
 
     function animate() {
+        time++;
         ctx.clearRect(0, 0, width, height);
         triangles.forEach(triangle => {
             triangle.update();
