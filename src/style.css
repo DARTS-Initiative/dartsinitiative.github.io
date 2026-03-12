@@ -707,28 +707,26 @@ p {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-/* Post Meta - Styled as a badge */
-/* Post Meta - Styled as a badge */
-/* Post Meta - Styled as a badge */
+/* Post Meta */
 .post-meta {
     display: inline-flex;
     align-items: center;
-    /* Default fallback */
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid transparent;
-    padding: 8px 16px;
-    border-radius: 50px;
-    font-size: 0.85rem;
-    font-weight: bold;
+    background: none;
+    border: none;
+    border-left: 2px solid currentColor;
+    padding: 4px 0 4px 12px;
+    border-radius: 0;
+    font-size: 0.8rem;
+    font-weight: 500;
     font-family: 'Goldman', sans-serif;
     margin-bottom: 35px;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    letter-spacing: 1.5px;
+    box-shadow: none;
     width: fit-content;
     white-space: nowrap;
-    gap: 10px;
-    /* Add space between items */
+    gap: 8px;
+    opacity: 0.85;
 }
 
 /* Ensure items inside don't have conflicting margins */
@@ -738,14 +736,14 @@ p {
 }
 
 .post-meta .separator {
-    opacity: 0.5;
+    opacity: 0.35;
     font-weight: 300;
-    margin: 0 2px;
+    margin: 0 0;
+    font-size: 0.7em;
 }
 
 .post-meta .category-name {
-    font-weight: 800;
-    /* Make category slightly bolder */
+    font-weight: 700;
 }
 
 .post-meta .author {

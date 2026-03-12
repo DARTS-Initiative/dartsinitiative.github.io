@@ -94,7 +94,6 @@ export function getCategoryStyleString(categoryName) {
     const style = categories[categoryName] || categories['default'];
     return `
         color: ${style.color};
-        background-color: ${style.backgroundColor};
-        border-color: ${style.borderColor};
+        border-color: ${style.color};
     `;
 }
