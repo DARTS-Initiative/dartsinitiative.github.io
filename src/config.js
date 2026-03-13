@@ -25,8 +25,8 @@ export const config = {
         license: "Content distributed under open licenses | Committed to Open Source & Open Access",
         links: [
             { text: "GitHub", url: "https://github.com/DARTS-Initiative" },
-            { text: "License", url: "#license" },
-            { text: "Contribute", url: "#contribute" }
+            { text: "License", url: "https://creativecommons.org/licenses/by/4.0/" },
+            { text: "Contribute", url: "#/page/contributing" }
         ]
     }
 };
