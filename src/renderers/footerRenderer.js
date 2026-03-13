@@ -1,4 +1,5 @@
 import { config } from '../config.js';
+import { showNewsletter } from '../newsletter.js';
 
 export function renderFooter() {
     let footer = document.querySelector('footer');
@@ -19,7 +20,13 @@ export function renderFooter() {
             <p class="license-info">${config.footer.license}</p>
             <div class="footer-links">
                 ${linksHtml}
+                <a href="#" class="footer-subscribe">Subscribe</a>
             </div>
         </div>
     `;
+
+    footer.querySelector('.footer-subscribe').addEventListener('click', (e) => {
+        e.preventDefault();
+        showNewsletter();
+    });
 }

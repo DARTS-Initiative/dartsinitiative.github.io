@@ -3,6 +3,7 @@ import { updateSeo } from '../seo.js';
 import { processHtml } from './base.js';
 import { getPostsIndex, getCategoryStyleString } from './postRenderer.js';
 import { getPages } from './pageRenderer.js';
+import { markSubscribed } from '../newsletter.js';
 
 const intro = import.meta.glob('../../content/intro.md', { eager: true });
 
@@ -80,6 +81,33 @@ export function renderHome(container) {
             </div>
         </div>
 
+        <h2 class="subscribe-title">Subscribe to DARTS</h2>
+        <div class="subscribe-section">
+            <p class="subscribe-text">
+                We're just getting started, but there are many projects on the horizon.<br>
+                If you don't want to miss what's coming,
+                <strong>drop your email</strong> and stay in the loop.
+                You'll get exclusive updates and a chance to be part of the project.
+            </p>
+            <form
+                action="https://buttondown.com/api/emails/embed-subscribe/DARTS"
+                method="post"
+                class="subscribe-form"
+                target="_blank"
+            >
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="your@email.com"
+                    required
+                    autocomplete="email"
+                    class="subscribe-input"
+                />
+                <button type="submit" class="subscribe-submit">>-/-></button>
+            </form>
+            <p class="subscribe-note">(We don't like spam either, so no worries, we'll keep it meaningful)</p>
+        </div>
+
         <div class="info-text">
             <p>
                 Interested in learning more? Check out our
@@ -87,4 +115,9 @@ export function renderHome(container) {
             </p>
         </div>
         `;
+
+    const subscribeForm = container.querySelector('.subscribe-form');
+    if (subscribeForm) {
+        subscribeForm.addEventListener('submit', () => markSubscribed());
+    }
 }
