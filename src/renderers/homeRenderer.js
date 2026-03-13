@@ -116,6 +116,44 @@ export function renderHome(container) {
         img.addEventListener('error', function() { this.src = config.logo.dark.png; }, { once: true });
     });
 
+    // Logo push animation
+    {
+        const logos = container.querySelectorAll('.logo');
+        let scale = 1;
+        let scaleVel = 0;
+        let animFrame = null;
+
+        const spring = () => {
+            const stiffness = 0.058;
+            const damping = 0.208;
+
+            scaleVel = scaleVel * damping + (1 - scale) * stiffness;
+            scale += scaleVel;
+
+            if (Math.abs(1 - scale) < 0.0005 && Math.abs(scaleVel) < 0.0005) {
+                scale = 1;
+                scaleVel = 0;
+                logos.forEach(l => { l.style.transform = ''; });
+                animFrame = null;
+                return;
+            }
+
+            logos.forEach(l => { l.style.transform = `scale(${scale})`; });
+            animFrame = requestAnimationFrame(spring);
+        };
+
+        logos.forEach(logo => {
+            logo.style.cursor = 'pointer';
+            logo.style.willChange = 'transform';
+            logo.addEventListener('click', () => {
+                scale = Math.max(0.3, scale - 0.22);
+                scaleVel = 0;
+                if (animFrame) cancelAnimationFrame(animFrame);
+                animFrame = requestAnimationFrame(spring);
+            });
+        });
+    }
+
     const subscribeForm = container.querySelector('.subscribe-form');
     if (subscribeForm) {
         subscribeForm.addEventListener('submit', () => markSubscribed());
