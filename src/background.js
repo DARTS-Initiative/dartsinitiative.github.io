@@ -71,7 +71,7 @@ export function initBackground(canvasId) {
             { count: 0.4, sizeRange: [22, 34], speedFactor: 0.7, opacityMult: 0.75 },
             { count: 0.3, sizeRange: [36, 50], speedFactor: 1.0, opacityMult: 1.0 },
         ],
-        totalCount: isMobile ? 180 : 300,
+        totalCount: isMobile ? 90 : 300,
     };
 
     let triangles = [];
