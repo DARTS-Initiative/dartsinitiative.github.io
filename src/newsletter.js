@@ -87,12 +87,14 @@ function createBanner() {
   // Subscribe: don't show for 6 months
   banner.querySelector('.newsletter-form').addEventListener('submit', () => {
     setState({ subscribedAt: Date.now() });
+    document.removeEventListener('keydown', onKeydown);
     setTimeout(() => removeBanner(banner), 300);
   });
 
   // Already subscribed: same as subscribe
   banner.querySelector('.newsletter-already').addEventListener('click', () => {
     setState({ subscribedAt: Date.now() });
+    document.removeEventListener('keydown', onKeydown);
     removeBanner(banner);
   });
 

@@ -8,7 +8,8 @@
       "Bash(npm run generate-indices:*)",
       "Bash(npm install)",
       "Bash(npm run dev:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(find /home/pablo/GitHub/web/content -name *.md -exec head -10 {} +)"
     ]
   }
 }

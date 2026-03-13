@@ -13,8 +13,8 @@ setupThemeToggle();
 initBackground('background-canvas');
 
 // Initialize Posts and Projects Data
-await initPosts();
-await initProjects();
+try { await initPosts(); } catch (e) { console.error('Failed to load posts:', e); }
+try { await initProjects(); } catch (e) { console.error('Failed to load projects:', e); }
 
 // Initialize Router (handles main content rendering)
 initRouter('app');

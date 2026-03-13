@@ -180,7 +180,7 @@ export function renderHome(container) {
                 const eased = 2 * progress * progress * progress;
 
                 logoWrapper.style.transform = eased > 0 ? `translateX(${eased * 130}%)` : '';
-                logoWrapper.style.opacity = eased > 0 ? String(1 - progress) : '';
+                logoWrapper.style.opacity = eased > 0 ? 1 - progress : '';
             };
 
             window.addEventListener('scroll', onScroll, { passive: true });

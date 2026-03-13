@@ -26,40 +26,44 @@ export function initRouter(containerId) {
 
     async function handleRoute() {
         const hash = window.location.hash;
+        try {
+            // Scroll to top on navigation
+            window.scrollTo(0, 0);
 
-        // Scroll to top on navigation
-        window.scrollTo(0, 0);
+            updateActiveLink(hash);
 
-        updateActiveLink(hash);
-
-        if (hash === '' || hash === '#/') {
-            renderHome(container);
-        } else if (hash === '#/blog') {
-            renderBlog(container);
-        } else if (hash === '#/projects') {
-            renderProjects(container);
-        } else if (hash.startsWith('#/post/')) {
-            const slug = hash.replace('#/post/', '');
-            if (isValidSlug(slug)) {
-                await renderPost(container, slug);
+            if (hash === '' || hash === '#/') {
+                renderHome(container);
+            } else if (hash === '#/blog') {
+                renderBlog(container);
+            } else if (hash === '#/projects') {
+                renderProjects(container);
+            } else if (hash.startsWith('#/post/')) {
+                const slug = hash.replace('#/post/', '');
+                if (isValidSlug(slug)) {
+                    await renderPost(container, slug);
+                } else {
+                    render404(container);
+                }
+            } else if (hash.startsWith('#/project/')) {
+                const slug = hash.replace('#/project/', '');
+                if (isValidSlug(slug)) {
+                    await renderProject(container, slug);
+                } else {
+                    render404(container);
+                }
+            } else if (hash.startsWith('#/page/')) {
+                const slug = hash.replace('#/page/', '');
+                if (isValidSlug(slug)) {
+                    renderPage(container, slug);
+                } else {
+                    render404(container);
+                }
             } else {
                 render404(container);
             }
-        } else if (hash.startsWith('#/project/')) {
-            const slug = hash.replace('#/project/', '');
-            if (isValidSlug(slug)) {
-                await renderProject(container, slug);
-            } else {
-                render404(container);
-            }
-        } else if (hash.startsWith('#/page/')) {
-            const slug = hash.replace('#/page/', '');
-            if (isValidSlug(slug)) {
-                renderPage(container, slug);
-            } else {
-                render404(container);
-            }
-        } else {
+        } catch (err) {
+            console.error('Route error:', err);
             render404(container);
         }
     }
