@@ -19,4 +19,4 @@ The projects side of DARTS is still taking shape, but the direction is clear: ev
 
 Improving the website, helping spread the work, or anything else that could **genuinely be useful** to the project.
 
-If you want to contribute, write to me at **pablo.magarinos@outlook.com**.
+If you want to contribute, write to me at **contact@dartsinitiative.com**.
