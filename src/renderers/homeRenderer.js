@@ -107,13 +107,6 @@ export function renderHome(container) {
             </form>
             <p class="subscribe-note">(We don't like spam either, so no worries, we'll keep it meaningful)</p>
         </div>
-
-        <div class="info-text">
-            <p>
-                Interested in learning more? Check out our
-                <a href="${config.footer.links[0].url}" target="_blank" rel="noopener noreferrer">GitHub repository</a>.
-            </p>
-        </div>
         `;
 
     container.querySelectorAll('.logo-light').forEach(img => {
