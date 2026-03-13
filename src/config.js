@@ -18,6 +18,8 @@ export const config = {
         title: "Latest Updates"
     },
 
+    newsletterUrl: 'https://buttondown.com/api/emails/embed-subscribe/DARTS',
+
     footer: {
         copyright: "© 2026 DARTS Initiative - Pablo Magariños Docampo",
         license: "Content distributed under open licenses | Committed to Open Source & Open Access",

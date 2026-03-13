@@ -11,7 +11,7 @@ export function renderFooter() {
     }
 
     const linksHtml = config.footer.links.map(link =>
-        `<a href="${link.url}" target="${link.url.startsWith('http') ? '_blank' : '_self'}">${link.text}</a>`
+        `<a href="${link.url}" target="${link.url.startsWith('http') ? '_blank' : '_self'}" ${link.url.startsWith('http') ? 'rel="noopener noreferrer"' : ''}>${link.text}</a>`
     ).join('');
 
     footer.innerHTML = `

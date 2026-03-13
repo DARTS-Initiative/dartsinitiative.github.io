@@ -25,4 +25,3 @@ renderFooter();
 // Initialize Newsletter Banner
 initNewsletter();
 
-console.log('DARTS Initiative Website Initialized');

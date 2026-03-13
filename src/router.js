@@ -4,6 +4,10 @@ import { renderProjects, renderProject } from './renderers/projectRenderer.js';
 import { renderPage } from './renderers/pageRenderer.js';
 import { render404 } from './renderers/base.js';
 
+function isValidSlug(slug) {
+    return /^[a-z0-9-]+$/i.test(slug);
+}
+
 export function initRouter(containerId) {
     const container = document.getElementById(containerId);
 
@@ -36,13 +40,25 @@ export function initRouter(containerId) {
             renderProjects(container);
         } else if (hash.startsWith('#/post/')) {
             const slug = hash.replace('#/post/', '');
-            await renderPost(container, slug);
+            if (isValidSlug(slug)) {
+                await renderPost(container, slug);
+            } else {
+                render404(container);
+            }
         } else if (hash.startsWith('#/project/')) {
             const slug = hash.replace('#/project/', '');
-            await renderProject(container, slug);
+            if (isValidSlug(slug)) {
+                await renderProject(container, slug);
+            } else {
+                render404(container);
+            }
         } else if (hash.startsWith('#/page/')) {
             const slug = hash.replace('#/page/', '');
-            renderPage(container, slug);
+            if (isValidSlug(slug)) {
+                renderPage(container, slug);
+            } else {
+                render404(container);
+            }
         } else {
             render404(container);
         }

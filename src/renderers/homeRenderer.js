@@ -47,15 +47,13 @@ export function renderHome(container) {
             class="logo logo-light"
             width="500"
             height="500"
-            onerror="this.onerror=null; this.src='${config.logo.light.png}'"
         >
-        <img 
-            src="${config.logo.dark.svg}" 
-            alt="${config.logo.alt}" 
+        <img
+            src="${config.logo.dark.svg}"
+            alt="${config.logo.alt}"
             class="logo logo-dark"
             width="500"
             height="500"
-            onerror="this.onerror=null; this.src='${config.logo.dark.png}'"
         >
         <h1 class="title">${config.siteTitle}</h1>
         <p class="description">${config.siteDescription}</p>
@@ -90,20 +88,22 @@ export function renderHome(container) {
                 You'll get exclusive updates and a chance to be part of the project.
             </p>
             <form
-                action="https://buttondown.com/api/emails/embed-subscribe/DARTS"
+                action="${config.newsletterUrl}"
                 method="post"
                 class="subscribe-form"
                 target="_blank"
             >
+                <label for="subscribe-email" class="sr-only">Email address</label>
                 <input
                     type="email"
                     name="email"
+                    id="subscribe-email"
                     placeholder="your@email.com"
                     required
                     autocomplete="email"
                     class="subscribe-input"
                 />
-                <button type="submit" class="subscribe-submit">>-/-></button>
+                <button type="submit" class="subscribe-submit" aria-label="Subscribe">>-/-></button>
             </form>
             <p class="subscribe-note">(We don't like spam either, so no worries, we'll keep it meaningful)</p>
         </div>
@@ -111,10 +111,17 @@ export function renderHome(container) {
         <div class="info-text">
             <p>
                 Interested in learning more? Check out our
-                <a href="${config.footer.links[0].url}" target="_blank">GitHub repository</a>.
+                <a href="${config.footer.links[0].url}" target="_blank" rel="noopener noreferrer">GitHub repository</a>.
             </p>
         </div>
         `;
+
+    container.querySelectorAll('.logo-light').forEach(img => {
+        img.addEventListener('error', function() { this.src = config.logo.light.png; }, { once: true });
+    });
+    container.querySelectorAll('.logo-dark').forEach(img => {
+        img.addEventListener('error', function() { this.src = config.logo.dark.png; }, { once: true });
+    });
 
     const subscribeForm = container.querySelector('.subscribe-form');
     if (subscribeForm) {

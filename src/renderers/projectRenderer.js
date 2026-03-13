@@ -10,7 +10,6 @@ export async function initProjects() {
         if (!response.ok) throw new Error('Failed to load projects index');
         const data = await response.json();
         projectsIndex = data.projects || [];
-        console.log('Projects index loaded:', projectsIndex.length, 'projects');
     } catch (e) {
         console.error('Error loading projects index:', e);
         projectsIndex = [];
@@ -29,7 +28,7 @@ export function renderProjects(container) {
                 <p>${project.excerpt || ''}</p>
             </div>
             <div class="project-logo-container">
-                ${project.logo ? `<img src="${project.logo}" alt="${project.title}" class="project-logo">` : ''}
+                ${project.logo ? `<img src="${project.logo}" alt="${project.title}" class="project-logo" width="100" height="100">` : ''}
             </div>
         </a>
         `;
@@ -68,7 +67,7 @@ export async function renderProject(container, slug) {
                 <a href="#/projects" class="back-button">Back to Projects</a>
                 <h1>${attributes.title}</h1>
                 <div class="project-detail-logo-container">
-                     ${attributes.logo ? `<img src="${attributes.logo}" alt="${attributes.title}" class="project-detail-logo">` : ''}
+                     ${attributes.logo ? `<img src="${attributes.logo}" alt="${attributes.title}" class="project-detail-logo" width="300" height="300">` : ''}
                 </div>
                 <div class="post-content">
                     ${processHtml(html)}

@@ -11,7 +11,6 @@ export async function initPosts() {
         if (!response.ok) throw new Error('Failed to load posts index');
         const data = await response.json();
         postsIndex = data.posts || [];
-        console.log('Posts index loaded:', postsIndex.length, 'posts');
     } catch (e) {
         console.error('Error loading posts index:', e);
         postsIndex = [];

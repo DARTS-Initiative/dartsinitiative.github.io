@@ -42,9 +42,6 @@
     --section-bg: rgba(255, 255, 255, 0.12);
     --card-bg: rgba(255, 255, 255, 0.2);
     --detail-bg: rgba(255, 255, 255, 0.6);
-    --intro-bg: rgba(255, 255, 255, 0.08);
-    /* Subtler than other boxes */
-
     /* Fallback/Default for other boxes if needed */
     --box-bg: rgba(255, 255, 255, 0.2);
     --text-muted: #666;
@@ -75,8 +72,6 @@
     --section-bg: var(--box-bg);
     --card-bg: var(--box-bg);
     --detail-bg: var(--box-bg);
-    --intro-bg: rgba(8, 9, 11, 0.55);
-    /* Subtler dark mode background */
     --text-muted: #aaa;
     --code-bg: rgba(255, 255, 255, 0.1);
 }
@@ -342,8 +337,8 @@ body {
     -webkit-backdrop-filter: blur(4px);
     z-index: -1;
     pointer-events: none;
-    mask-image: radial-gradient(ellipse 80% 70% at center, black 70%, transparent 100%);
     -webkit-mask-image: radial-gradient(ellipse 80% 70% at center, black 70%, transparent 100%);
+    mask-image: radial-gradient(ellipse 80% 70% at center, black 70%, transparent 100%);
 }
 
 .intro-section h1,
@@ -561,8 +556,6 @@ body {
 /* Post Detail View */
 .post-detail {
     text-align: left;
-    padding: 60px 40px;
-    margin-bottom: 60px;
     padding: 60px 40px;
     margin-bottom: 60px;
     background: var(--detail-bg);
@@ -1373,4 +1366,17 @@ footer {
     background: var(--box-bg);
     border-radius: 12px;
     border: 1px dashed var(--glass-border);
+}
+
+/* Screen reader only utility */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
 }

@@ -1,3 +1,5 @@
+import { config } from './config.js';
+
 const STORAGE_KEY = 'darts_newsletter';
 const DISMISS_DAYS = 7;
 const SUBSCRIBED_DAYS = 30;
@@ -46,14 +48,16 @@ function createBanner() {
         <button class="newsletter-already">I'm already subscribed</button>
       </div>
       <form
-        action="https://buttondown.com/api/emails/embed-subscribe/DARTS"
+        action="${config.newsletterUrl}"
         method="post"
         class="newsletter-form"
         target="_blank"
       >
+        <label for="newsletter-email" class="sr-only">Email address</label>
         <input
           type="email"
           name="email"
+          id="newsletter-email"
           placeholder="your@email.com"
           required
           autocomplete="email"
