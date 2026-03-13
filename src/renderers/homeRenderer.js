@@ -126,8 +126,8 @@ export function renderHome(container) {
         let animFrame = null;
 
         const spring = () => {
-            const stiffness = 0.058;
-            const damping = 0.208;
+            const stiffness = 0.08;
+            const damping = 0.872;
 
             scaleVel = scaleVel * damping + (1 - scale) * stiffness;
             scale += scaleVel;
@@ -144,14 +144,30 @@ export function renderHome(container) {
             animFrame = requestAnimationFrame(spring);
         };
 
+        let clickCount = 0;
+        let escaped = false;
         logos.forEach(logo => {
             logo.style.cursor = 'pointer';
             logo.style.willChange = 'transform';
             logo.addEventListener('click', () => {
+                if (escaped) return;
                 scale = Math.max(0.3, scale - 0.22);
                 scaleVel = 0;
                 if (animFrame) cancelAnimationFrame(animFrame);
                 animFrame = requestAnimationFrame(spring);
+
+                clickCount++;
+                if (clickCount === 10) {
+                    escaped = true;
+                    if (animFrame) cancelAnimationFrame(animFrame);
+                    const wrapper = container.querySelector('.logo-wrapper');
+                    if (wrapper) {
+                        wrapper.dispatchEvent(new Event('escaped'));
+                        wrapper.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 1, 1), opacity 0.6s ease';
+                        wrapper.style.transform = 'translateX(150%)';
+                        wrapper.style.opacity = '0';
+                    }
+                }
             });
         });
     }
@@ -162,12 +178,17 @@ export function renderHome(container) {
         if (logoWrapper) {
             // Capture starting position (router guarantees scrollY=0 at render time)
             const initialTop = logoWrapper.getBoundingClientRect().top;
+            let scrollEscaped = false;
+
+            // Allow the easter egg to disable the scroll animation
+            logoWrapper.addEventListener('escaped', () => { scrollEscaped = true; });
 
             const onScroll = () => {
                 if (!logoWrapper.isConnected) {
                     window.removeEventListener('scroll', onScroll);
                     return;
                 }
+                if (scrollEscaped) return;
                 const rect = logoWrapper.getBoundingClientRect();
                 const height = rect.height;
                 if (!height) return;
