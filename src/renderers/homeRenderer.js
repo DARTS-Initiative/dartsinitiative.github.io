@@ -41,9 +41,10 @@ export function renderHome(container) {
     const introContent = processHtml(intro['../../content/intro.md']?.html);
 
     container.innerHTML = `
-    <img 
-            src="${config.logo.light.svg}" 
-            alt="${config.logo.alt}" 
+    <div class="logo-wrapper">
+        <img
+            src="${config.logo.light.svg}"
+            alt="${config.logo.alt}"
             class="logo logo-light"
             width="500"
             height="500"
@@ -55,6 +56,7 @@ export function renderHome(container) {
             width="500"
             height="500"
         >
+    </div>
         <h1 class="title">${config.siteTitle}</h1>
         <p class="description">${config.siteDescription}</p>
 
@@ -152,6 +154,37 @@ export function renderHome(container) {
                 animFrame = requestAnimationFrame(spring);
             });
         });
+    }
+
+    // Logo scroll-exit animation: translateX directly tied to scroll position
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const logoWrapper = container.querySelector('.logo-wrapper');
+        if (logoWrapper) {
+            // Capture starting position (router guarantees scrollY=0 at render time)
+            const initialTop = logoWrapper.getBoundingClientRect().top;
+
+            const onScroll = () => {
+                if (!logoWrapper.isConnected) {
+                    window.removeEventListener('scroll', onScroll);
+                    return;
+                }
+                const rect = logoWrapper.getBoundingClientRect();
+                const height = rect.height;
+                if (!height) return;
+
+                // progress: 0 = logo at initial position, 1 = fully off-screen
+                // Range spans from initialTop (first scroll) to -height (completely gone)
+                const totalRange = initialTop + height;
+                const progress = Math.max(0, Math.min(1, (initialTop - rect.top) / totalRange));
+                // Cubic ease-in: very smooth start → accelerates as it exits
+                const eased = 2 * progress * progress * progress;
+
+                logoWrapper.style.transform = eased > 0 ? `translateX(${eased * 130}%)` : '';
+                logoWrapper.style.opacity = eased > 0 ? String(1 - progress) : '';
+            };
+
+            window.addEventListener('scroll', onScroll, { passive: true });
+        }
     }
 
     const subscribeForm = container.querySelector('.subscribe-form');

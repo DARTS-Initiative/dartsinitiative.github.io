@@ -217,6 +217,12 @@ body {
     filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
 }
 
+/* Scroll exit/enter animation wrapper — keeps spring (scale on img) separate */
+.logo-wrapper {
+    will-change: transform, opacity;
+    overflow: visible;
+}
+
 [data-theme="light"] .logo-dark {
     display: none;
 }
