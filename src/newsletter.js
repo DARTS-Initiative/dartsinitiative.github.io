@@ -86,9 +86,12 @@ function createBanner() {
 
   // Subscribe: don't show for 6 months
   banner.querySelector('.newsletter-form').addEventListener('submit', () => {
-    setState({ subscribedAt: Date.now() });
     document.removeEventListener('keydown', onKeydown);
-    setTimeout(() => removeBanner(banner), 300);
+    setTimeout(() => {
+      removeBanner(banner);
+      showThankYou();
+    }, 300);
+    setState({ subscribedAt: Date.now() });
   });
 
   // Already subscribed: same as subscribe
@@ -105,8 +108,44 @@ function createBanner() {
   document.addEventListener('keydown', onKeydown);
 }
 
+function showThankYou() {
+  const overlay = document.createElement('div');
+  overlay.className = 'thankyou-overlay';
+  overlay.innerHTML = `
+    <div class="thankyou-popup" role="dialog" aria-label="Thank you">
+      <button class="newsletter-close" aria-label="Close">&times;</button>
+      <img src="/images/thanks.png" alt="Thank you" class="thankyou-img" />
+      <p class="thankyou-message">Thank you for joining us!</p>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      overlay.classList.add('thankyou-visible');
+    });
+  });
+
+  const close = () => {
+    overlay.classList.remove('thankyou-visible');
+    overlay.addEventListener('transitionend', () => overlay.remove(), { once: true });
+    document.removeEventListener('keydown', onKeydown);
+  };
+
+  overlay.querySelector('.newsletter-close').addEventListener('click', close);
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) close();
+  });
+
+  const onKeydown = (e) => {
+    if (e.key === 'Escape') close();
+  };
+  document.addEventListener('keydown', onKeydown);
+}
+
 export function markSubscribed() {
   setState({ subscribedAt: Date.now() });
+  showThankYou();
 }
 
 export function showNewsletter() {

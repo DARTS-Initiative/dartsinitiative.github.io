@@ -1235,6 +1235,74 @@ footer {
     }
 }
 
+/* Thank You Popup */
+.thankyou-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+
+.thankyou-overlay.thankyou-visible {
+    opacity: 1;
+}
+
+.thankyou-popup {
+    position: relative;
+    background: var(--detail-bg);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 36px 40px;
+    max-width: 380px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.25);
+    transform: scale(0.9) translateY(20px);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.thankyou-visible .thankyou-popup {
+    transform: scale(1) translateY(0);
+}
+
+.thankyou-img {
+    width: 120px;
+    height: auto;
+    margin: 0 auto 18px;
+    display: block;
+}
+
+.thankyou-message {
+    font-family: 'Goldman', sans-serif;
+    font-size: 1.15rem;
+    color: var(--title-color);
+    letter-spacing: 0.5px;
+    margin: 0;
+}
+
+[data-theme="dark"] .thankyou-overlay {
+    background: rgba(0, 0, 0, 0.65);
+}
+
+[data-theme="dark"] .thankyou-popup {
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 768px) {
+    .thankyou-popup {
+        padding: 28px 24px;
+    }
+}
+
 /* Subscribe Section (inline on home page) */
 .subscribe-title {
     font-family: 'Goldman', sans-serif;
