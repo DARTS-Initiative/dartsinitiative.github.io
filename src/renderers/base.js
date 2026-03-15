@@ -16,7 +16,7 @@ export function processHtml(html) {
         const cleanSize = size.trim();
         // Basic validation for CSS size units
         if (/^\d+(px|%|em|rem|vw|vh)$/.test(cleanSize)) {
-            return `<img ${prefix}${alt}" style="width: 100%; max-width: ${cleanSize};" ${suffix}`;
+            return `<img ${prefix}${alt}" style="width: 100%; max-width: ${cleanSize};"${suffix.slice(1)}`;
         }
         return match;
     });

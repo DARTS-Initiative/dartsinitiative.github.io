@@ -84,7 +84,7 @@ function createBanner() {
   };
   banner.querySelector('.newsletter-close').addEventListener('click', close);
 
-  // Subscribe: don't show for 6 months
+  // Subscribe: don't show for 30 days
   banner.querySelector('.newsletter-form').addEventListener('submit', () => {
     document.removeEventListener('keydown', onKeydown);
     setTimeout(() => {
