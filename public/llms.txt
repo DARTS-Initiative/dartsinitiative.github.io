@@ -1,0 +1,35 @@
+# DARTS
+
+> Open ecosystem to research and share advances in AI that understands. DARTS explores progress toward AI that can truly reason, understand what it observes, and build its own model of the world.
+
+DARTS is a personal initiative by Pablo Magariños Docampo to explore and document the open development of next-generation artificial intelligence. It is not a lab or a company — it is a purpose: to work on AI that genuinely understands its environment, and to do all of that in the open.
+
+## Research Focus Areas
+
+- **World Models**: Enabling AI to build and navigate internal representations of reality, so it can imagine, plan, and act beyond what it has directly observed.
+- **Causal Learning**: Moving beyond correlation toward systems that understand why things happen, through exploration and interaction with the world.
+- **Multi-Agent AI**: Developing the foundations for AI systems that communicate, coordinate, and reason collectively rather than operating in isolation.
+
+## About
+
+- [About DARTS](https://dartsinitiative.com/#/page/about-us): Full background on the initiative, its mission, and its founder.
+- [Contributing](https://dartsinitiative.com/#/page/contributing): How to get involved — blog content, projects, development, and outreach.
+- [Roadmap](https://dartsinitiative.com/#/page/roadmap): Planned direction and milestones.
+
+## Blog
+
+- [Welcome to DARTS](https://dartsinitiative.com/#/post/demo-post): DARTS begins as a personal project focused on advancing AI in real-world environments and opening that work to public collaboration.
+
+## Projects
+
+Projects developed under DARTS are Open-Source and featured at [dartsinitiative.com/#/projects](https://dartsinitiative.com/#/projects).
+
+## Links
+
+- [GitHub](https://github.com/DARTS-Initiative): Source code and open-source projects.
+- [Newsletter](https://buttondown.com/DARTS): Subscribe for updates.
+- Contact: contact@dartsinitiative.com
+
+## License
+
+Code is MIT licensed. Content is distributed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
