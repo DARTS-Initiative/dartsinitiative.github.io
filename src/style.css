@@ -1256,10 +1256,10 @@ footer {
 
 .thankyou-popup {
     position: relative;
-    background: var(--detail-bg);
+    background: rgba(30, 30, 35, 0.92);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
-    border: 1px solid var(--glass-border);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 16px;
     padding: 36px 40px;
     max-width: 380px;
@@ -1284,9 +1284,18 @@ footer {
 .thankyou-message {
     font-family: 'Goldman', sans-serif;
     font-size: 1.15rem;
-    color: var(--title-color);
+    color: #f0f0f0;
     letter-spacing: 0.5px;
     margin: 0;
+}
+
+.thankyou-popup .newsletter-close {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.thankyou-popup .newsletter-close:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
 }
 
 [data-theme="dark"] .thankyou-overlay {
