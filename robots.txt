@@ -1,0 +1,10 @@
+# https://dartsinitiative.com
+
+User-agent: *
+Allow: /
+
+# Static assets - no need to index
+Disallow: /assets/
+
+# Sitemap
+Sitemap: https://dartsinitiative.com/sitemap.xml
