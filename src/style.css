@@ -240,7 +240,7 @@ body {
 
 .description {
     font-family: 'VT323', monospace;
-    font-size: clamp(1.4em, 3vw, 1.8em);
+    font-size: clamp(1.8em, 3.5vw, 2.4em);
     font-weight: 400;
     color: var(--text-muted);
     margin-bottom: 70px;
@@ -269,8 +269,8 @@ body {
 }
 
 .description strong {
-    color: var(--hero-accent-color);
-    font-weight: 600;
+    color: #c7a86b;
+    font-weight: 500;
 }
 
 .intro-section strong {
@@ -904,7 +904,7 @@ footer {
     }
 
     .description {
-        font-size: 1.25em;
+        font-size: 1.6em;
     }
 
     .intro-section p,
