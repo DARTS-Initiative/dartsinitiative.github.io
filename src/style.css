@@ -241,7 +241,7 @@ body {
 .description {
     font-family: 'Bitcount Single', sans-serif;
     font-size: clamp(1.4em, 3vw, 1.8em);
-    font-weight: 700;
+    font-weight: 400;
     color: var(--text-muted);
     margin-bottom: 70px;
     line-height: 1.4;
@@ -270,7 +270,7 @@ body {
 
 .description strong {
     color: var(--hero-accent-color);
-    font-weight: 800;
+    font-weight: 600;
 }
 
 .intro-section strong {
