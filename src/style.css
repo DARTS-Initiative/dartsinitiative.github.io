@@ -239,7 +239,7 @@ body {
 }
 
 .description {
-    font-family: 'Bitcount Single', sans-serif;
+    font-family: 'Pixelify Sans', sans-serif;
     font-size: clamp(1.4em, 3vw, 1.8em);
     font-weight: 400;
     color: var(--text-muted);
