@@ -1,11 +1,11 @@
 {
   "meta": {
     "total": 1,
-    "generatedAt": "2026-03-13T18:33:46.410Z"
+    "generatedAt": "2026-03-18T12:12:17.267Z"
   },
   "posts": [
     {
-      "slug": "demo-post",
+      "slug": "welcome-to-darts",
       "title": "Welcome to DARTS",
       "date": "2026-03-11",
       "category": "News",

@@ -30,8 +30,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Generate Content Indices
-        run: npm run generate-indices
+      - name: Run tests
+        run: npm test
 
       - name: Build
         run: npm run build
