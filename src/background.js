@@ -14,10 +14,24 @@ export function initBackground(canvasId) {
         || ('ontouchstart' in window)
         || (navigator.maxTouchPoints > 0);
 
+    let prevWidth = width;
+
     window.addEventListener('resize', () => {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
-        createTriangles();
+        const newWidth = window.innerWidth;
+        const newHeight = window.innerHeight;
+
+        // On mobile, scrolling hides/shows the address bar, which changes
+        // innerHeight and fires resize. Only regenerate triangles when the
+        // width actually changes (orientation change or real resize).
+        const widthChanged = newWidth !== prevWidth;
+
+        width = canvas.width = newWidth;
+        height = canvas.height = newHeight;
+
+        if (widthChanged) {
+            prevWidth = newWidth;
+            createTriangles();
+        }
     });
 
     if (!isMobile) {
@@ -52,7 +66,7 @@ export function initBackground(canvasId) {
     function getBaseColor() {
         const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
         if (isDark) {
-            return { ...hexToRgb('#FFFFFF'), a: 0.022 };
+            return { ...hexToRgb('#FFFFFF'), a: isMobile ? 0.030 : 0.022 };
         }
         return { ...hexToRgb('#000000'), a: 0.1 };
     }
