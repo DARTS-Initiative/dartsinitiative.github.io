@@ -7,7 +7,7 @@ DARTS is built on the belief that meaningful research can happen in the open,
 driven by people who care about the problem. If that resonates with you, 
 there are several ways to get involved.
 
-## Blog content
+## Content
 
 Paper analyses, explainers, opinions, news. If you have something worth saying 
 within the space DARTS cares about, it is welcome here.
