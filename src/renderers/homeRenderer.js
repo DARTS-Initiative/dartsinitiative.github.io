@@ -84,10 +84,8 @@ export function renderHome(container) {
         <h2 class="subscribe-title">Subscribe to DARTS</h2>
         <div class="subscribe-section">
             <p class="subscribe-text">
-                We're just getting started, but there are many projects on the horizon.<br>
-                If you don't want to miss what's coming,
-                <strong>drop your email</strong> and stay in the loop.
-                You'll get exclusive updates and a chance to be part of the project.
+                DARTS publishes project updates, technical content, and research notes as the work happens.
+                If you want to follow along, <strong>leave your email</strong> here.
             </p>
             <form
                 action="${config.newsletterUrl}"

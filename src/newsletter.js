@@ -43,8 +43,8 @@ function createBanner() {
     <button class="newsletter-close" aria-label="Close">&times;</button>
     <div class="newsletter-body">
       <div class="newsletter-text">
-        <strong>Be part of DARTS</strong>
-        <span><b>We are just getting started.</b> Don't miss our new projects, and <em class="newsletter-highlight">get exclusive updates!</em></span>
+        <strong>Follow DARTS</strong>
+        <span>Leave your email and we will keep you in the loop with our <em class="newsletter-highlight">open research.</em></span>
         <button class="newsletter-already">I'm already subscribed</button>
       </div>
       <form
