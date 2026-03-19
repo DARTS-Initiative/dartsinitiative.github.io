@@ -1,6 +1,6 @@
 export const config = {
     siteTitle: "DARTS",
-    siteDescription: "Open ecosystem to research and share advances in <strong>AI that understands</strong>.",
+    siteDescription: "Open initiative to research and share advances in <strong>AI that understands</strong>.",
 
     logo: {
         light: {
@@ -21,12 +21,12 @@ export const config = {
     newsletterUrl: 'https://buttondown.com/api/emails/embed-subscribe/DARTS',
 
     footer: {
-        copyright: "© 2026 DARTS Initiative - Pablo Magariños Docampo",
-        license: "Content distributed under open licenses | Committed to Open Source & Open Access",
+        copyright: "© 2026 DARTS Initiative",
+        license: "Content licensed under CC BY 4.0",
         links: [
             { text: "GitHub", url: "https://github.com/DARTS-Initiative" },
             { text: "License", url: "https://creativecommons.org/licenses/by/4.0/" },
-            { text: "Contribute", url: "#/page/contributing" }
+            { text: "Contact", url: "mailto:contact@dartsinitiative.com" }
         ]
     }
 };

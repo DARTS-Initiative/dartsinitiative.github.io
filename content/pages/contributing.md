@@ -3,20 +3,27 @@ title: Contributing
 ---
 
 
-There are no strict contribution guidelines yet, and no formal rules. The idea is for this to grow organically as the project does.
-
-If you want to get involved, there are three main ways to do it:
+DARTS is built on the belief that meaningful research can happen in the open, 
+driven by people who care about the problem. If that resonates with you, 
+there are several ways to get involved.
 
 ## Blog content
 
-Paper analyses, explainers, news, opinions. If you have something worth saying that fits within the space DARTS cares about, **it is welcome here**.
+Paper analyses, explainers, opinions, news. If you have something worth saying 
+within the space DARTS cares about, it is welcome here.
 
 ## Projects
 
-The projects side of DARTS is still taking shape, but the direction is clear: everything developed under the DARTS umbrella will be **Open-Source**, will be featured in the projects tab, and will aim to integrate actively with the rest of the ecosystem.
+Everything developed under DARTS is open source. If you want to contribute to 
+an active project, propose a new one, or bring work you are already doing into 
+this space, we want to hear about it.
 
 ## Development and outreach
 
-Improving the website, helping spread the work, or anything else that could **genuinely be useful** to the project.
+Improving the website, helping spread the work, translating content, or anything 
+else that could genuinely move the initiative forward.
 
-If you want to contribute, write to me at **contact@dartsinitiative.com**.
+---
+
+If you want to contribute in any of these ways, reach out at 
+**contact@dartsinitiative.com**.

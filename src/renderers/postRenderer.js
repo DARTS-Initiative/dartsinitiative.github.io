@@ -22,7 +22,7 @@ export function getPostsIndex() {
 }
 
 export function renderBlog(container) {
-    updateSeo('Blog', 'Read the latest news and updates from the DARTS Initiative.');
+    updateSeo('Content', 'Read the latest news and updates from the DARTS Initiative.');
 
     const postsHtml = postsIndex.map((post) => {
         const slug = post.slug;
@@ -42,9 +42,9 @@ export function renderBlog(container) {
 
     container.innerHTML = `
         <div class="blog-section" style="margin-top: 40px;">
-            <h2>All Blog Posts</h2>
+            <h2>All Posts</h2>
             <div class="posts-list">
-                ${postsHtml || '<p class="no-content-message">No blog posts published yet.</p>'}
+                ${postsHtml || '<p class="no-content-message">No posts published yet.</p>'}
             </div>
              <div style="text-align:center; margin-top:40px;">
                 <a href="#/" class="text-link">← Back to Home</a>
@@ -70,7 +70,7 @@ export async function renderPost(container, slug) {
 
         container.innerHTML = `
             <div class="post-detail">
-                <a href="#/blog" class="back-button">Back to Blog</a>
+                <a href="#/blog" class="back-button">Back to Content</a>
                 <h1>${attributes.title}</h1>
                 <div class="post-meta" style="${getCategoryStyleString(attributes.category)}">
                     <span class="category-name">${attributes.category || 'Others'}</span>

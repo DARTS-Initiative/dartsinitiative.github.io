@@ -2,10 +2,8 @@
 title: "Introduction"
 ---
 
-Current generative AI achieves incredible things, but it learns passively: consuming massive amounts of data without grounding its knowledge in reality. 
+Current generative AI achieves remarkable things, but it learns **passively**. It does not **understand** — it **imitates**. It imitates our reasoning, our biases, our limitations.
 
+**DARTS** is an open research initiative working toward AI that genuinely understands its environment, builds its **own model of the world**, and generates **new knowledge** rather than recombining existing patterns.
 
-DARTS explores and shares progress toward AI that can truly reason, understand what it observes, and build its own model of the world.
-
-
-We believe this is the path toward AI that is genuinely **curious** and capable of **understanding the world**.
+We focus on three areas where we believe the next leap forward will happen: **world models**, **causal learning**, and **multi-agent systems**. All of our work is developed in the open.

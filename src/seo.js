@@ -9,7 +9,7 @@ export function updateSeo(title, description) {
         metaDescription.name = 'description';
         document.head.appendChild(metaDescription);
     }
-    metaDescription.content = description || 'Decentralized Autonomous Research & Technology System - Advancing open science and technology.';
+    metaDescription.content = description || 'Open initiative to research and share advances in AI that understands';
 
     // Update Social Media Tags (OG & Twitter)
     const updateMeta = (name, content) => {
@@ -18,7 +18,7 @@ export function updateSeo(title, description) {
     };
 
     const finalTitle = title ? `${title} | DARTS` : 'DARTS';
-    const finalDesc = description || 'Decentralized Autonomous Research & Technology System - Advancing open science and technology.';
+    const finalDesc = description || 'Open initiative to research and share advances in AI that understands.';
 
     updateMeta('og:title', finalTitle);
     updateMeta('og:description', finalDesc);
