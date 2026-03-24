@@ -7,7 +7,7 @@ DARTS is a personal initiative by Pablo Magariños Docampo to explore and docume
 ## Research Focus Areas
 
 - **World Models**: Enabling AI to build and navigate internal representations of reality, so it can imagine, plan, and act beyond what it has directly observed.
-- **Causal Learning**: Moving beyond correlation toward systems that understand why things happen, through exploration and interaction with the world.
+- **Causal & Continual Learning**: Moving beyond correlation toward systems that understand why things happen and keep learning after deployment — models that doubt what they know, build new knowledge through exploration, and constantly improve by validating their own hypotheses about the world.
 - **Multi-Agent AI**: Developing the foundations for AI systems that communicate, coordinate, and reason collectively rather than operating in isolation.
 
 ## About
